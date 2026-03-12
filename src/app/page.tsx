@@ -1,65 +1,184 @@
+"use client";
+
 import Image from "next/image";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { ArrowRight, Leaf, Star, Sparkles, Globe } from "lucide-react";
+import ProductCard from "@/components/ProductCard";
+import products from "@/lib/data.json";
 
 export default function Home() {
+  const featuredProducts = products.slice(0, 3);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="flex flex-col w-full overflow-hidden">
+      {/* Hero Section */}
+      <section className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden bg-cream">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center z-10">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            className="space-y-8"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            <div className="inline-flex items-center space-x-2 bg-garden-green/10 text-garden-green px-4 py-2 rounded-full text-sm font-bold uppercase tracking-widest">
+              <Leaf size={16} />
+              <span>100% Organic Fram-to-Table</span>
+            </div>
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-garden-green leading-[0.9] tracking-tighter">
+              The Purest <br />
+              <span className="text-dragonfruit-pink">Dragon Fruit</span> <br />
+              Experience.
+            </h1>
+            <p className="text-lg md:text-xl text-gray-600 max-w-lg leading-relaxed">
+              Experience the vibrant taste of Rafah Garden. Hand-picked, locally grown, and delivered fresh from our orchards to your table.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link 
+                href="/shop" 
+                className="bg-garden-green text-white px-10 py-5 rounded-2xl font-bold text-lg flex items-center justify-center space-x-2 hover:bg-opacity-90 hover:shadow-xl hover:shadow-garden-green/20 transition-all"
+              >
+                <span>Shop the Harvest</span>
+                <ArrowRight size={20} />
+              </Link>
+              <Link 
+                href="/about" 
+                className="bg-white text-garden-green border-2 border-garden-green/10 px-10 py-5 rounded-2xl font-bold text-lg flex items-center justify-center hover:bg-garden-green/5 transition-all"
+              >
+                <span>Our Story</span>
+              </Link>
+            </div>
+          </motion.div>
+
+          {/* Hero Image / Visual */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8, rotate: 5 }}
+            animate={{ opacity: 1, scale: 1, rotate: 0 }}
+            transition={{ duration: 1, type: "spring" }}
+            className="relative"
           >
-            Documentation
-          </a>
+            <div className="relative aspect-square max-w-[600px] mx-auto">
+              <div className="absolute inset-0 bg-dragonfruit-pink/10 rounded-full blur-3xl animate-pulse" />
+              <Image
+                src="/images/hero-dragon-fruit.png"
+                alt="Premium Dragon Fruit"
+                fill
+                priority
+                className="object-contain filter drop-shadow-2xl"
+              />
+            </div>
+            {/* Floating Element */}
+            <motion.div
+              animate={{ y: [0, -20, 0] }}
+              transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+              className="absolute -top-10 -right-10 bg-white p-6 rounded-3xl shadow-2xl space-y-2 hidden md:block"
+            >
+              <div className="flex text-yellow-500">
+                {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="currentColor" />)}
+              </div>
+              <p className="font-bold text-sm text-gray-900 italic">"The freshest fruit I've ever tasted!"</p>
+              <p className="text-xs text-gray-500">- Sarah J, Premium Member</p>
+            </motion.div>
+          </motion.div>
         </div>
-      </main>
+      </section>
+
+      {/* Featured Products */}
+      <section className="py-24 bg-white border-y border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 md:px-8">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+            <div className="space-y-4">
+              <span className="text-dragonfruit-pink font-bold uppercase tracking-widest text-sm">Our Favorites</span>
+              <h2 className="text-4xl md:text-5xl font-black text-garden-green">Featured Products</h2>
+              <p className="text-gray-500 max-w-md">Our best-selling dragon fruit varieties and premium artisanal preserves.</p>
+            </div>
+            <Link href="/shop" className="group flex items-center space-x-2 text-garden-green font-bold text-lg hover:text-dragonfruit-pink transition-colors">
+              <span>View Full Catalog</span>
+              <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {featuredProducts.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section className="py-24 relative overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/farm-landscape.png"
+            alt="Farm Landscape"
+            fill
+            className="object-cover opacity-10"
+          />
+        </div>
+        <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
+          <div className="bg-garden-green rounded-3xl md:rounded-[4rem] text-white p-8 md:p-20 overflow-hidden relative">
+            <div className="absolute top-0 right-0 p-12 opacity-10 pointer-events-none">
+              <Globe size={300} strokeWidth={1} />
+            </div>
+            
+            <div className="max-w-2xl space-y-12">
+              <div className="space-y-6">
+                <div className="flex items-center space-x-2 text-dragonfruit-pink font-bold uppercase tracking-widest">
+                  <Sparkles size={20} />
+                  <span>Our Philosophy</span>
+                </div>
+                <h2 className="text-4xl md:text-6xl font-black leading-tight">
+                  Grown with respect <br /> for the Earth.
+                </h2>
+                <p className="text-xl text-cream/80 leading-relaxed">
+                  Founded in 2012, Rafah Garden has been a pioneer in sustainable dragon fruit farming. We believe in transparency, organic practices, and bringing the purest form of nature back to your table.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
+                <div>
+                  <p className="text-3xl font-black text-dragonfruit-pink">100%</p>
+                  <p className="text-sm text-cream/60">Organic Certified</p>
+                </div>
+                <div>
+                  <p className="text-3xl font-black text-dragonfruit-pink">24h</p>
+                  <p className="text-sm text-cream/60">Farm to Table</p>
+                </div>
+                <div>
+                  <p className="text-3xl font-black text-dragonfruit-pink">50k+</p>
+                  <p className="text-sm text-cream/60">Happy Customers</p>
+                </div>
+              </div>
+
+              <Link 
+                href="/about" 
+                className="inline-flex items-center space-x-3 bg-white text-garden-green px-8 py-4 rounded-2xl font-bold hover:scale-105 transition-transform"
+              >
+                <span>Read Our Full Story</span>
+                <ArrowRight size={20} />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* B2B / Bulk CTA */}
+      <section className="py-24 px-4 md:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="bg-cream rounded-3xl p-8 md:p-16 flex flex-col lg:flex-row items-center justify-between gap-12 border border-garden-green/5">
+            <div className="space-y-4 text-center lg:text-left">
+              <h2 className="text-3xl md:text-5xl font-black text-garden-green">B2B & Bulk Orders</h2>
+              <p className="text-gray-600 max-w-xl text-lg">
+                Are you a restaurant, cafe, or wholesaler? Partner with us for consistent supply of premium dragon fruit products.
+              </p>
+            </div>
+            <button className="bg-dragonfruit-pink text-white px-12 py-5 rounded-2xl font-bold text-xl hover:shadow-2xl hover:shadow-dragonfruit-pink/20 transition-all shrink-0">
+              Get Wholesale Pricing
+            </button>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
