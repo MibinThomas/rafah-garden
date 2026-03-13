@@ -18,6 +18,7 @@ import {
 import { useCart } from "@/context/CartContext";
 import products from "@/lib/data.json";
 import { cn } from "@/lib/utils";
+import siteContent from "@/lib/site-content.json";
 
 const ProductDetail = () => {
   const params = useParams();
@@ -35,9 +36,9 @@ const ProductDetail = () => {
   if (!product) {
     return (
       <div className="min-h-[70vh] flex flex-col items-center justify-center space-y-4">
-        <h2 className="text-2xl font-bold">Product not found</h2>
+        <h2 className="text-2xl font-bold">{siteContent.product_page.not_found_message}</h2>
         <Link href="/shop" className="text-dragonfruit-pink font-bold hover:underline">
-          Back to Shop
+          {siteContent.product_page.back_to_shop_button}
         </Link>
       </div>
     );
@@ -66,7 +67,7 @@ const ProductDetail = () => {
           className="flex items-center space-x-2 text-gray-500 hover:text-garden-green transition-colors mb-8 group"
         >
           <ChevronLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
-          <span className="text-sm font-bold uppercase tracking-widest">Back to Products</span>
+          <span className="text-sm font-bold uppercase tracking-widest">{siteContent.product_page.back_button}</span>
         </button>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
@@ -105,7 +106,7 @@ const ProductDetail = () => {
             <div className="space-y-4">
               <div className="flex items-center space-x-2 text-dragonfruit-pink font-bold uppercase tracking-widest text-xs">
                 <Star size={14} fill="currentColor" />
-                <span>Best Seller</span>
+                <span>{siteContent.product_page.best_seller_label}</span>
               </div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-garden-green tracking-tighter leading-tight">
                 {product.name}
@@ -117,7 +118,7 @@ const ProductDetail = () => {
                 <div className="h-6 w-[1px] bg-gray-200" />
                 <div className="flex items-center space-x-1 text-yellow-500">
                   {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="currentColor" />)}
-                  <span className="text-gray-400 text-xs font-bold ml-2">(128 Reviews)</span>
+                  <span className="text-gray-400 text-xs font-bold ml-2">({siteContent.product_page.reviews_count} {siteContent.product_page.reviews_label})</span>
                 </div>
               </div>
             </div>
@@ -173,19 +174,18 @@ const ProductDetail = () => {
               </button>
             </div>
 
-            {/* Features */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-8 border-t">
               <div className="flex items-center space-x-3 text-gray-600">
                 <div className="p-2 bg-garden-green/10 rounded-lg text-garden-green">
                   <ShieldCheck size={20} />
                 </div>
-                <span className="text-sm font-bold">100% Organic Certified</span>
+                <span className="text-sm font-bold">{siteContent.product_page.certification_label}</span>
               </div>
               <div className="flex items-center space-x-3 text-gray-600">
                 <div className="p-2 bg-garden-green/10 rounded-lg text-garden-green">
                   <Truck size={20} />
                 </div>
-                <span className="text-sm font-bold">Free Local Delivery</span>
+                <span className="text-sm font-bold">{siteContent.product_page.shipping_label}</span>
               </div>
             </div>
           </div>
@@ -195,13 +195,13 @@ const ProductDetail = () => {
         <section className="mt-32 bg-cream rounded-[3rem] p-12 md:p-20 overflow-hidden relative">
           <div className="max-w-3xl space-y-8 relative z-10">
             <h2 className="text-3xl md:text-5xl font-black text-garden-green leading-tight">
-              Why this fruit matters.
+              {siteContent.product_page.marketing_section.title}
             </h2>
             <p className="text-lg text-gray-600 leading-relaxed">
-              Every dragon fruit we sell is hand-pollinated and stone-ground (where applicable). We don&apos;t just farm; we preserve a legacy of agricultural excellence in Rafah. Our soil is enriched with organic compost, ensuring every bite is packed with the nutrients nature intended.
+              {siteContent.product_page.marketing_section.description}
             </p>
             <Link href="/about" className="inline-flex items-center space-x-2 text-garden-green font-bold group">
-              <span>Learn about our process</span>
+              <span>{siteContent.product_page.marketing_section.cta}</span>
               <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
             </Link>
           </div>

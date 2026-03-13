@@ -4,15 +4,17 @@ import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Sprout, Users, Heart, Leaf } from "lucide-react";
+import siteContent from "@/lib/site-content.json";
 
 const About = () => {
+  const { about_page } = siteContent;
   return (
     <div className="min-h-screen bg-white">
       {/* Hero */}
       <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
         <Image
-          src="/images/farm-landscape.png"
-          alt="Rafah Garden Farm"
+          src={about_page.hero_image}
+          alt={about_page.hero_alt || "Rafah Garden Farm"}
           fill
           className="object-cover brightness-50"
         />
@@ -22,7 +24,7 @@ const About = () => {
             animate={{ opacity: 1, y: 0 }}
             className="text-dragonfruit-pink font-black uppercase tracking-[0.3em] text-sm"
           >
-            Since 2012
+            {about_page.hero_badge}
           </motion.span>
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
@@ -30,7 +32,7 @@ const About = () => {
             transition={{ delay: 0.1 }}
             className="text-5xl md:text-7xl font-black tracking-tighter"
           >
-            Rooted in Rafah.
+            {about_page.hero_title}
           </motion.h1>
         </div>
       </section>
@@ -40,31 +42,26 @@ const About = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <div className="space-y-8">
             <h2 className="text-4xl md:text-5xl font-black text-garden-green leading-tight">
-              A legacy of <br /> sustainable growth.
+              {about_page.story_title}
             </h2>
             <div className="space-y-6 text-lg text-gray-600 leading-relaxed">
-              <p>
-                Rafah Garden started with a single dragon fruit cutting and a vision to transform local agriculture. Our founder, motivated by the unique biodiversity of the Rafah region, sought to create a farm that didn&apos;t just produce food, but nurtured the environment.
-              </p>
-              <p>
-                Today, we manage over 50 acres of premium dragon fruit orchards. Our practices are 100% organic, utilizing solar energy for irrigation and traditional composting methods to enrich our soil.
-              </p>
+              {about_page.story_paragraphs.map((p: string, i: number) => (
+                <p key={i}>{p}</p>
+              ))}
             </div>
             <div className="grid grid-cols-2 gap-8">
-              <div className="space-y-2">
-                <p className="text-4xl font-black text-dragonfruit-pink">50+</p>
-                <p className="text-sm font-bold text-gray-500 uppercase tracking-widest">Acres of Orchards</p>
-              </div>
-              <div className="space-y-2">
-                <p className="text-4xl font-black text-dragonfruit-pink">12k</p>
-                <p className="text-sm font-bold text-gray-500 uppercase tracking-widest">Trees Harvested</p>
-              </div>
+              {about_page.story_stats.map((stat: { label: string; value: string }, i: number) => (
+                <div key={i} className="space-y-2">
+                  <p className="text-4xl font-black text-dragonfruit-pink">{stat.value}</p>
+                  <p className="text-sm font-bold text-gray-500 uppercase tracking-widest">{stat.label}</p>
+                </div>
+              ))}
             </div>
           </div>
           <div className="relative aspect-square rounded-[3rem] overflow-hidden">
             <Image
-              src="/images/hero-dragon-fruit.png"
-              alt="Farm Life"
+              src={about_page.story_image}
+              alt={about_page.story_alt || "Farm Life"}
               fill
               className="object-cover"
             />
@@ -82,23 +79,22 @@ const About = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              { icon: <Leaf />, title: "Pure Organic", text: "Zero pesticides, zero chemicals. Only the purity of nature in every harvest." },
-              { icon: <Heart />, title: "Community First", text: "We employ local families and support Rafah's growing agricultural industry." },
-              { icon: <Sprout />, title: "Innovation", text: "Using smart-farming tech to minimize water waste and maximize nutritional value." }
-            ].map((value, i) => (
-              <motion.div 
-                key={i}
-                whileHover={{ y: -10 }}
-                className="bg-white p-10 rounded-[2.5rem] shadow-sm border border-gray-100 space-y-6"
-              >
-                <div className="w-14 h-14 bg-garden-green/10 rounded-2xl flex items-center justify-center text-garden-green">
-                  {value.icon}
-                </div>
-                <h3 className="text-2xl font-black text-gray-900">{value.title}</h3>
-                <p className="text-gray-500 leading-relaxed">{value.text}</p>
-              </motion.div>
-            ))}
+            {about_page.values.map((value, i) => {
+              const icons = [<Leaf key="leaf" />, <Heart key="heart" />, <Sprout key="sprout" />];
+              return (
+                <motion.div 
+                  key={i}
+                  whileHover={{ y: -10 }}
+                  className="bg-white p-10 rounded-[2.5rem] shadow-sm border border-gray-100 space-y-6"
+                >
+                  <div className="w-14 h-14 bg-garden-green/10 rounded-2xl flex items-center justify-center text-garden-green">
+                    {icons[i] || <Leaf />}
+                  </div>
+                  <h3 className="text-2xl font-black text-gray-900">{value.title}</h3>
+                  <p className="text-gray-500 leading-relaxed">{value.description}</p>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>

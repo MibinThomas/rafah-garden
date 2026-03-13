@@ -1,0 +1,10 @@
+[
+  {
+    "id": "ENQ-001",
+    "name": "Michael Brown",
+    "email": "michael@example.com",
+    "message": "Interested in bulk ordering dragon fruit for my juice bar.",
+    "date": "2026-03-12",
+    "status": "Read"
+  }
+]

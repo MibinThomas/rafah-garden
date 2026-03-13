@@ -1,0 +1,11 @@
+{
+  "payment": {
+    "api_url": "",
+    "api_key": "",
+    "gateway_name": "Generic Payment Gateway"
+  },
+  "site": {
+    "seo_title": "Rafah Garden | Premium Dragon Fruit",
+    "seo_description": "Experience the vibrant taste of Rafah Garden. Hand-picked, locally grown dragon fruit."
+  }
+}

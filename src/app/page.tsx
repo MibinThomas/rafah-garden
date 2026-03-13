@@ -1,14 +1,16 @@
 "use client";
 
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Leaf, Star, Sparkles, Globe } from "lucide-react";
 import ProductCard from "@/components/ProductCard";
 import products from "@/lib/data.json";
+import siteContent from "@/lib/site-content.json";
 
 export default function Home() {
-
+  const { hero, about_preview } = siteContent;
   return (
     <div className="flex flex-col w-full overflow-hidden">
       {/* Hero Section */}
@@ -22,15 +24,17 @@ export default function Home() {
           >
             <div className="inline-flex items-center space-x-2 bg-garden-green/10 text-garden-green px-4 py-2 rounded-full text-sm font-bold uppercase tracking-widest">
               <Leaf size={16} />
-              <span>100% Organic Fram-to-Table</span>
+              <span>{hero.badge}</span>
             </div>
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-garden-green leading-[0.9] tracking-tighter">
-              The Purest <br />
-              <span className="text-dragonfruit-pink">Dragon Fruit</span> <br />
-              Experience.
+              {hero.title?.split("\n").map((line: string, i: number) => (
+                <React.Fragment key={i}>
+                  {line} {i === 0 && <br />}
+                </React.Fragment>
+              )) || hero.title}
             </h1>
             <p className="text-lg md:text-xl text-gray-600 max-w-lg leading-relaxed">
-              Experience the vibrant taste of Rafah Garden. Hand-picked, locally grown, and delivered fresh from our orchards to your table.
+              {hero.subtitle}
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link 
@@ -59,8 +63,8 @@ export default function Home() {
             <div className="relative aspect-square max-w-[600px] mx-auto">
               <div className="absolute inset-0 bg-dragonfruit-pink/10 rounded-full blur-3xl animate-pulse" />
               <Image
-                src="/images/hero-dragon-fruit.png"
-                alt="Premium Dragon Fruit"
+                src={hero.image}
+                alt={hero.alt || "Premium Dragon Fruit"}
                 fill
                 priority
                 className="object-contain filter drop-shadow-2xl"
@@ -117,8 +121,8 @@ export default function Home() {
       <section className="py-24 relative overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/farm-landscape.png"
-            alt="Farm Landscape"
+            src={about_preview.image}
+            alt={about_preview.alt || "Farm Landscape"}
             fill
             className="object-cover opacity-10"
           />
@@ -133,29 +137,23 @@ export default function Home() {
               <div className="space-y-6">
                 <div className="flex items-center space-x-2 text-dragonfruit-pink font-bold uppercase tracking-widest">
                   <Sparkles size={20} />
-                  <span>Our Philosophy</span>
+                  <span>{about_preview.badge}</span>
                 </div>
                 <h2 className="text-4xl md:text-6xl font-black leading-tight">
-                  Grown with respect <br /> for the Earth.
+                  {about_preview.title}
                 </h2>
                 <p className="text-xl text-cream/80 leading-relaxed">
-                  Founded in 2012, Rafah Garden has been a pioneer in sustainable dragon fruit farming. We believe in transparency, organic practices, and bringing the purest form of nature back to your table.
+                  {about_preview.description}
                 </p>
               </div>
 
               <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
-                <div>
-                  <p className="text-3xl font-black text-dragonfruit-pink">100%</p>
-                  <p className="text-sm text-cream/60">Organic Certified</p>
-                </div>
-                <div>
-                  <p className="text-3xl font-black text-dragonfruit-pink">24h</p>
-                  <p className="text-sm text-cream/60">Farm to Table</p>
-                </div>
-                <div>
-                  <p className="text-3xl font-black text-dragonfruit-pink">50k+</p>
-                  <p className="text-sm text-cream/60">Happy Customers</p>
-                </div>
+                {about_preview.stats.map((stat, i) => (
+                  <div key={i}>
+                    <p className="text-3xl font-black text-dragonfruit-pink">{stat.value}</p>
+                    <p className="text-sm text-cream/60">{stat.label}</p>
+                  </div>
+                ))}
               </div>
 
               <Link 

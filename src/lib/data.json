@@ -1,12 +1,16 @@
 [
   {
     "id": "1",
-    "name": "Fresh Red Dragon Fruit",
-    "price": 12.50,
+    "name": "Fresh Dragon Fruit",
+    "price": 12.5,
     "image": "/images/fresh-dragon-fruit.png",
     "category": "Fruit",
     "description": "Hand-picked, premium red dragon fruit directly from our Rafah orchards. Rich in antioxidants and vibrant in flavor.",
-    "variants": ["1kg", "3kg", "5kg"]
+    "variants": [
+      "1kg",
+      "3kg",
+      "5kg"
+    ]
   },
   {
     "id": "2",
@@ -16,44 +20,58 @@
     "image": "/images/jam.png",
     "category": "Preserves",
     "description": "Small-batch jam made with 100% natural dragon fruit and a hint of organic lemon. No artificial preservatives.",
-    "variants": ["250g", "500g"]
+    "variants": [
+      "250g",
+      "500g"
+    ]
   },
   {
     "id": "3",
     "name": "Organic Dragon Fruit Powder",
-    "price": 24.00,
-    "oldPrice": 29.00,
+    "price": 24,
+    "oldPrice": 29,
     "image": "/images/powder.png",
     "category": "Powder",
     "description": "Freeze-dried pink dragon fruit powder. Perfect for smoothies, lattes, and natural food coloring.",
-    "variants": ["100g", "250g"]
+    "variants": [
+      "100g",
+      "250g"
+    ]
   },
   {
     "id": "4",
     "name": "Dragon Fruit & Rose Syrup",
-    "price": 14.50,
+    "price": 14.5,
     "image": "/images/syrup.png",
     "category": "Preserves",
     "description": "A premium botanical blend of dragon fruit and rose petals. Perfect for mocktails and desserts.",
-    "variants": ["500ml"]
+    "variants": [
+      "500ml"
+    ]
   },
   {
     "id": "5",
     "name": "Yellow Dragon Fruit (XL)",
-    "price": 18.00,
+    "price": 18,
     "image": "/images/yellow-fruit.png",
     "category": "Fruit",
     "description": "Rare yellow dragon fruit with exceptionally sweet white flesh. The connoisseur's choice.",
-    "variants": ["1kg", "2kg"]
+    "variants": [
+      "1kg",
+      "2kg"
+    ]
   },
   {
     "id": "6",
     "name": "Dried Dragon Fruit Chips",
-    "price": 6.50,
+    "price": 6.5,
     "image": "/images/chips.png",
     "category": "Snacks",
     "description": "Crunchy, healthy, and naturally sweet. Made from 100% dragon fruit without added sugar.",
-    "variants": ["50g", "100g"]
+    "variants": [
+      "50g",
+      "100g"
+    ]
   },
   {
     "id": "7",
@@ -62,6 +80,8 @@
     "image": "/images/honey.png",
     "category": "Preserves",
     "description": "Limited edition honey harvested from bees that pollinate our dragon fruit flowers. Subtle floral notes.",
-    "variants": ["300g"]
+    "variants": [
+      "300g"
+    ]
   }
 ]
