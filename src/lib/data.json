@@ -12,6 +12,7 @@
     "id": "2",
     "name": "Artisanal Dragon Fruit Jam",
     "price": 8.99,
+    "oldPrice": 10.99,
     "image": "/images/jam.png",
     "category": "Preserves",
     "description": "Small-batch jam made with 100% natural dragon fruit and a hint of organic lemon. No artificial preservatives.",
@@ -21,6 +22,7 @@
     "id": "3",
     "name": "Organic Dragon Fruit Powder",
     "price": 24.00,
+    "oldPrice": 29.00,
     "image": "/images/powder.png",
     "category": "Powder",
     "description": "Freeze-dried pink dragon fruit powder. Perfect for smoothies, lattes, and natural food coloring.",
@@ -30,7 +32,7 @@
     "id": "4",
     "name": "Dragon Fruit & Rose Syrup",
     "price": 14.50,
-    "image": "/images/jam.png",
+    "image": "/images/syrup.png",
     "category": "Preserves",
     "description": "A premium botanical blend of dragon fruit and rose petals. Perfect for mocktails and desserts.",
     "variants": ["500ml"]
@@ -57,7 +59,7 @@
     "id": "7",
     "name": "Dragon Fruit Orchard Honey",
     "price": 15.99,
-    "image": "/images/jam.png",
+    "image": "/images/honey.png",
     "category": "Preserves",
     "description": "Limited edition honey harvested from bees that pollinate our dragon fruit flowers. Subtle floral notes.",
     "variants": ["300g"]

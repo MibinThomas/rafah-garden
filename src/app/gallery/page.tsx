@@ -80,7 +80,7 @@ const Gallery = () => {
         <div className="max-w-2xl mx-auto space-y-8">
           <div className="w-16 h-1 w-1/4 bg-dragonfruit-pink/20 mx-auto" />
           <p className="text-3xl md:text-4xl font-black text-garden-green italic leading-tight">
-            "Nature doesn't hurry, yet everything is accomplished."
+            &quot;Nature doesn&apos;t hurry, yet everything is accomplished.&quot;
           </p>
           <p className="text-gray-400 font-bold uppercase tracking-widest text-sm">— Lao Tzu</p>
         </div>

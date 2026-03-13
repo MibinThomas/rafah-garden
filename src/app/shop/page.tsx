@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, SlidersHorizontal, ChevronDown, LayoutGrid, List } from "lucide-react";
+import { Search, SlidersHorizontal, ChevronDown, LayoutGrid } from "lucide-react";
 import ProductCard from "@/components/ProductCard";
 import products from "@/lib/data.json";
 import { cn } from "@/lib/utils";
@@ -21,7 +21,7 @@ export default function Shop() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   const filteredProducts = useMemo(() => {
-    let result = products.filter((product) => {
+    const result = products.filter((product) => {
       const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase());
       const matchesCategory = selectedCategory === "All" || product.category === selectedCategory;
       return matchesSearch && matchesCategory;

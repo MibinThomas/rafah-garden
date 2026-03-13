@@ -58,7 +58,7 @@ const Cart = () => {
                   <div className="space-y-2">
                     <p className="text-lg font-semibold">Your cart is empty</p>
                     <p className="text-sm text-gray-500">
-                      Looks like you haven't added anything to your cart yet.
+                      Looks like you haven&apos;t added anything to your cart yet.
                     </p>
                   </div>
                   <button

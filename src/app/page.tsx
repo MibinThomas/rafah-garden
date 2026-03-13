@@ -8,7 +8,6 @@ import ProductCard from "@/components/ProductCard";
 import products from "@/lib/data.json";
 
 export default function Home() {
-  const featuredProducts = products.slice(0, 3);
 
   return (
     <div className="flex flex-col w-full overflow-hidden">
@@ -76,7 +75,7 @@ export default function Home() {
               <div className="flex text-yellow-500">
                 {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="currentColor" />)}
               </div>
-              <p className="font-bold text-sm text-gray-900 italic">"The freshest fruit I've ever tasted!"</p>
+              <p className="font-bold text-sm text-gray-900 italic">&quot;The freshest fruit I&apos;ve ever tasted!&quot;</p>
               <p className="text-xs text-gray-500">- Sarah J, Premium Member</p>
             </motion.div>
           </motion.div>
@@ -84,23 +83,31 @@ export default function Home() {
       </section>
 
       {/* Featured Products */}
-      <section className="py-24 bg-white border-y border-gray-100">
+      <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
-            <div className="space-y-4">
-              <span className="text-dragonfruit-pink font-bold uppercase tracking-widest text-sm">Our Favorites</span>
-              <h2 className="text-4xl md:text-5xl font-black text-garden-green">Featured Products</h2>
-              <p className="text-gray-500 max-w-md">Our best-selling dragon fruit varieties and premium artisanal preserves.</p>
+          <div className="flex flex-col md:flex-row justify-between items-center mb-12 gap-6 border-b border-gray-100 pb-6">
+            <div className="flex items-center gap-4">
+              <div className="w-1.5 h-10 bg-dragonfruit-pink rounded-full" />
+              <h2 className="text-3xl md:text-4xl font-black text-[#001D3D]">Popular Products</h2>
             </div>
-            <Link href="/shop" className="group flex items-center space-x-2 text-garden-green font-bold text-lg hover:text-dragonfruit-pink transition-colors">
-              <span>View Full Catalog</span>
-              <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
-            </Link>
+            <div className="flex items-center gap-6 overflow-x-auto no-scrollbar w-full md:w-auto">
+              <button className="text-dragonfruit-pink font-bold text-sm border-b-2 border-dragonfruit-pink pb-1 shrink-0">Top Rated</button>
+              <button className="text-gray-400 font-bold text-sm hover:text-dragonfruit-pink transition-colors shrink-0">Best Selling</button>
+              <button className="text-gray-400 font-bold text-sm hover:text-dragonfruit-pink transition-colors shrink-0">Latest Product</button>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
+            {products.slice(0, 8).map((product, idx) => (
+              <div 
+                key={product.id}
+                className={`
+                  ${idx >= 4 ? "hidden md:block" : ""} 
+                  ${idx >= 6 ? "md:hidden lg:block" : ""}
+                `}
+              >
+                <ProductCard product={product} />
+              </div>
             ))}
           </div>
         </div>

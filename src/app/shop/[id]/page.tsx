@@ -198,7 +198,7 @@ const ProductDetail = () => {
               Why this fruit matters.
             </h2>
             <p className="text-lg text-gray-600 leading-relaxed">
-              Every dragon fruit we sell is hand-pollinated and stone-ground (where applicable). We don't just farm; we preserve a legacy of agricultural excellence in Rafah. Our soil is enriched with organic compost, ensuring every bite is packed with the nutrients nature intended.
+              Every dragon fruit we sell is hand-pollinated and stone-ground (where applicable). We don&apos;t just farm; we preserve a legacy of agricultural excellence in Rafah. Our soil is enriched with organic compost, ensuring every bite is packed with the nutrients nature intended.
             </p>
             <Link href="/about" className="inline-flex items-center space-x-2 text-garden-green font-bold group">
               <span>Learn about our process</span>

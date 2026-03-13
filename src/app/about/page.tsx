@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Sprout, Users, Heart, ShieldCheck, Leaf } from "lucide-react";
+import { Sprout, Users, Heart, Leaf } from "lucide-react";
 
 const About = () => {
   return (
@@ -44,7 +44,7 @@ const About = () => {
             </h2>
             <div className="space-y-6 text-lg text-gray-600 leading-relaxed">
               <p>
-                Rafah Garden started with a single dragon fruit cutting and a vision to transform local agriculture. Our founder, motivated by the unique biodiversity of the Rafah region, sought to create a farm that didn't just produce food, but nurtured the environment.
+                Rafah Garden started with a single dragon fruit cutting and a vision to transform local agriculture. Our founder, motivated by the unique biodiversity of the Rafah region, sought to create a farm that didn&apos;t just produce food, but nurtured the environment.
               </p>
               <p>
                 Today, we manage over 50 acres of premium dragon fruit orchards. Our practices are 100% organic, utilizing solar energy for irrigation and traditional composting methods to enrich our soil.
@@ -113,7 +113,7 @@ const About = () => {
             Join us in our journey to greener tables.
           </h2>
           <p className="text-xl text-cream/70 max-w-xl mx-auto">
-            Whether you're a customer, partner, or fellow farmer, we'd love to connect.
+            Whether you&apos;re a customer, partner, or fellow farmer, we&apos;d love to connect.
           </p>
           <div className="flex justify-center pt-8">
             <button className="bg-dragonfruit-pink text-white px-12 py-5 rounded-2xl font-black text-lg hover:shadow-2xl hover:shadow-dragonfruit-pink/20 transition-all">
