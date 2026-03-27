@@ -28,7 +28,7 @@ export default function AboutPage() {
       {/* Hero Section */}
       <section className="relative h-screen flex flex-col items-center justify-center overflow-hidden bg-gradient-to-br from-[#AF1A5B] to-[#7f1342] text-white">
         <motion.div style={{ y: titleY }} className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <h1 className="font-avant text-[30vw] font-bold leading-none select-none opacity-10 text-[#9a0c52]" style={{ textShadow: "1px 1px 0px #fff" }}>Rafah</h1>
+          <h1 className="font-avant text-[27vw] font-bold leading-none select-none opacity-20 text-white">RAFAH</h1>
         </motion.div>
 
         <div className="relative z-10 text-center px-6 max-w-4xl mx-auto pt-20">

@@ -44,7 +44,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
             src={product.image}
             alt={product.title1}
             fill
-            className="object-contain z-10 scale-110 lg:scale-100"
+            className="object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.3)] z-10 scale-110 lg:scale-100"
             priority
           />
         </motion.div>

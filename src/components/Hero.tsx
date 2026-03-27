@@ -40,9 +40,9 @@ export default function Hero() {
         className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-0 overflow-hidden"
       >
         <h1 
-          className="font-avant text-[40vw] md:text-[30vw] lg:text-[25vw] leading-none text-[#9a0c52] font-bold tracking-tighter opacity-80 whitespace-nowrap drop-shadow-[0_10px_20px_rgba(0,0,0,0.15)] transition-all duration-1000 -translate-y-16 md:translate-y-0"
+          className="font-avant text-[36vw] md:text-[27vw] lg:text-[22vw] xl:text-[20vw] leading-none text-white font-bold tracking-tighter opacity-80 whitespace-nowrap drop-shadow-[0_10px_20px_rgba(0,0,0,0.15)] transition-all duration-1000 -translate-y-16 md:translate-y-0"
         >
-          Rafah
+          RAFAH
         </h1>
       </motion.div>
 
@@ -110,7 +110,7 @@ export default function Hero() {
               src={currentProduct.image} 
               alt={currentProduct.title2} 
               fill 
-              className="object-contain" 
+              className="object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.3)]" 
               priority
             />
           </motion.div>
