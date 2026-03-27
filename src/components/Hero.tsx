@@ -60,7 +60,7 @@ export default function Hero() {
         style={{ y: yText }}
         className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-0 overflow-hidden"
       >
-        <h1 className="font-oswald text-[40vw] md:text-[25vw] leading-none text-white font-bold tracking-tighter opacity-95 whitespace-nowrap drop-shadow-lg transition-all duration-1000 -translate-y-16 md:translate-y-0">
+        <h1 className="font-oswald text-[40vw] md:text-[30vw] lg:text-[25vw] leading-none text-white font-bold tracking-tighter opacity-95 whitespace-nowrap drop-shadow-lg transition-all duration-1000 -translate-y-16 md:translate-y-0">
           RAFAH
         </h1>
       </motion.div>
@@ -71,7 +71,7 @@ export default function Hero() {
           style={{ y: yFruits1 }}
           animate={{ rotate: 360, y: [0, -20, 0] }}
           transition={{ rotate: { duration: 50, repeat: Infinity, ease: "linear" }, y: { duration: 4, repeat: Infinity, ease: "easeInOut" } }}
-          className="absolute top-[15%] left-[20%] w-32 h-32 md:w-56 md:h-56 drop-shadow-2xl"
+          className="absolute top-[15%] left-[20%] w-32 h-32 md:w-40 md:h-40 lg:w-56 lg:h-56 drop-shadow-2xl"
         >
           <Image src="/images/fresh.png" alt="Dragon Fruit" fill className="object-contain" priority />
         </motion.div>
@@ -80,14 +80,14 @@ export default function Hero() {
           style={{ y: yFruits2 }}
           animate={{ rotate: -360, y: [0, 20, 0] }}
           transition={{ rotate: { duration: 60, repeat: Infinity, ease: "linear" }, y: { duration: 5, repeat: Infinity, ease: "easeInOut" } }}
-          className="absolute bottom-[20%] right-[20%] w-24 h-24 md:w-48 md:h-48 drop-shadow-2xl"
+          className="absolute bottom-[20%] right-[20%] w-24 h-24 md:w-32 md:h-32 lg:w-48 lg:h-48 drop-shadow-2xl"
         >
           <Image src="/images/fresh.png" alt="Dragon Fruit" fill className="object-contain" priority />
         </motion.div>
       </div>
 
       {/* Center Animated Product Image */}
-      <div className="relative z-20 w-full h-[45vh] sm:h-[50vh] md:h-[70vh] lg:h-[80vh] max-w-full md:max-w-md lg:max-w-lg -translate-y-16 md:translate-y-0 flex justify-center items-center">
+      <div className="relative z-20 w-full h-[45vh] sm:h-[50vh] md:h-[60vh] lg:h-[70vh] xl:h-[80vh] max-w-full md:max-w-sm lg:max-w-md xl:max-w-lg -translate-y-16 md:translate-y-0 flex justify-center items-center">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentProduct.id}
@@ -119,15 +119,15 @@ export default function Hero() {
             transition={{ duration: 0.5 }}
             className="flex flex-col items-center md:items-start"
           >
-            <h2 className="font-outfit text-3xl md:text-5xl font-light mb-2 md:mb-4 leading-tight">
+            <h2 className="font-outfit text-3xl md:text-4xl lg:text-5xl font-light mb-2 md:mb-4 leading-tight">
               {currentProduct.title1} <br className="hidden sm:block"/> <span className="font-bold">{currentProduct.title2}</span>
             </h2>
-            <p className="text-xs sm:text-sm md:text-base text-white/90 font-light mb-4 md:mb-6 leading-relaxed max-w-[300px] md:max-w-md">
+            <p className="text-xs sm:text-sm lg:text-base text-white/90 font-light mb-4 md:mb-6 leading-relaxed max-w-[300px] md:max-w-[380px] lg:max-w-md">
               {currentProduct.desc}
             </p>
           </motion.div>
         </AnimatePresence>
-        <button className="bg-white text-brand-pink px-6 md:px-8 py-2 md:py-3 rounded-full font-bold text-xs md:text-sm hover:scale-105 transition-transform shadow-xl hover:shadow-2xl">
+        <button className="bg-white text-brand-pink px-6 md:px-7 lg:px-8 py-2 md:py-2.5 lg:py-3 rounded-full font-bold text-xs md:text-sm hover:scale-105 transition-transform shadow-xl hover:shadow-2xl">
           See More
         </button>
       </div>
@@ -136,13 +136,13 @@ export default function Hero() {
       <div className="absolute bottom-20 md:bottom-12 left-1/2 -translate-x-1/2 z-30 flex md:flex gap-4">
         <button 
           onClick={prevSlide}
-          className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/50 flex items-center justify-center text-white hover:bg-white hover:text-brand-pink transition-colors text-lg md:text-xl font-light cursor-pointer shadow-lg"
+          className="w-10 h-10 lg:w-12 lg:h-12 rounded-full border border-white/50 flex items-center justify-center text-white hover:bg-white hover:text-brand-pink transition-colors text-lg lg:text-xl font-light cursor-pointer shadow-lg"
         >
           &#10094;
         </button>
         <button 
           onClick={nextSlide}
-          className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/50 flex items-center justify-center text-white hover:bg-white hover:text-brand-pink transition-colors text-lg md:text-xl font-light cursor-pointer shadow-lg"
+          className="w-10 h-10 lg:w-12 lg:h-12 rounded-full border border-white/50 flex items-center justify-center text-white hover:bg-white hover:text-brand-pink transition-colors text-lg lg:text-xl font-light cursor-pointer shadow-lg"
         >
           &#10095;
         </button>
