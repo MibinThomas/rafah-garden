@@ -32,15 +32,17 @@ export default function Hero() {
       ref={ref}
       id="home"
       className="relative h-screen flex items-center justify-center overflow-hidden transition-colors duration-1000"
-      style={{ background: `linear-gradient(to bottom right, ${currentProduct.colorStart}, ${currentProduct.colorEnd})` }}
+      style={{ backgroundColor: currentProduct.bgColor }}
     >
       {/* Huge Background Text */}
       <motion.div 
         style={{ y: yText }}
         className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-0 overflow-hidden"
       >
-        <h1 className="font-oswald text-[40vw] md:text-[30vw] lg:text-[25vw] leading-none text-white font-bold tracking-tighter opacity-80 whitespace-nowrap blur-[3px] drop-shadow-[0_10px_20px_rgba(0,0,0,0.15)] transition-all duration-1000 -translate-y-16 md:translate-y-0">
-          RAFAH
+        <h1 
+          className="font-avant text-[40vw] md:text-[30vw] lg:text-[25vw] leading-none text-[#9a0c52] font-bold tracking-tighter opacity-80 whitespace-nowrap drop-shadow-[0_10px_20px_rgba(0,0,0,0.15)] transition-all duration-1000 -translate-y-16 md:translate-y-0"
+        >
+          Rafah
         </h1>
       </motion.div>
 
@@ -108,7 +110,7 @@ export default function Hero() {
               src={currentProduct.image} 
               alt={currentProduct.title2} 
               fill 
-              className="object-contain drop-shadow-[0_40px_60px_rgba(0,0,0,0.5)]" 
+              className="object-contain" 
               priority
             />
           </motion.div>

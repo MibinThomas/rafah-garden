@@ -21,6 +21,7 @@ const config: Config = {
       fontFamily: {
         sans: ["var(--font-outfit)", "sans-serif"],
         oswald: ["var(--font-oswald)", "sans-serif"],
+        avant: ["var(--font-avant)", "sans-serif"],
       },
       animation: {
         "float": "float 6s ease-in-out infinite",

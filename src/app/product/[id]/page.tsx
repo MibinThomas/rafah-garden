@@ -15,8 +15,8 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
 
   return (
     <main 
-      className="min-h-screen flex flex-col overflow-hidden"
-      style={{ background: `linear-gradient(to bottom right, ${product.colorStart}, ${product.colorEnd})` }}
+      className="min-h-screen flex flex-col overflow-hidden transition-colors duration-1000"
+      style={{ backgroundColor: product.bgColor }}
     >
       {/* Header / Navigation back */}
       <motion.nav 
@@ -40,12 +40,11 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="relative w-full max-w-[280px] sm:max-w-xs lg:max-w-lg aspect-[3/4] lg:aspect-square flex items-center justify-center order-1 lg:order-none"
         >
-          <div className="absolute inset-0 bg-white/20 rounded-full blur-3xl opacity-40 mix-blend-overlay scale-75"></div>
           <Image 
             src={product.image}
             alt={product.title1}
             fill
-            className="object-contain drop-shadow-[0_50px_70px_rgba(0,0,0,0.6)] z-10 scale-110 lg:scale-100"
+            className="object-contain z-10 scale-110 lg:scale-100"
             priority
           />
         </motion.div>

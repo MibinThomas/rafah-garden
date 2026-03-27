@@ -7,10 +7,10 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 
 const links = [
-  { name: "Home", href: "#home" },
-  { name: "About", href: "#about" },
-  { name: "Products", href: "#products" },
-  { name: "Experience", href: "#experience" },
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
+  { name: "Products", href: "/#products" },
+  { name: "Experience", href: "/#experience" },
 ];
 
 export default function Navbar() {
@@ -63,9 +63,9 @@ export default function Navbar() {
             href="#products"
             className={`${
               isScrolled 
-                ? "bg-brand-pink text-white hover:bg-brand-secondary shadow-brand-pink/50" 
-                : "bg-white text-brand-pink hover:bg-gray-100 shadow-white/30"
-            } px-6 py-2 rounded-full font-medium transition-all shadow-lg`}
+                ? "bg-transparent border border-brand-pink text-brand-pink hover:bg-brand-pink/10" 
+                : "bg-transparent border border-white text-white hover:bg-white/10"
+            } px-6 py-2 rounded-full font-medium transition-all shadow-sm hover:shadow-md`}
           >
             Shop Now
           </Link>
