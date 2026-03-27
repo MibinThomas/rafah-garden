@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Outfit, Oswald } from "next/font/google";
 import "./globals.css";
+import MobileBottomNav from "@/components/MobileBottomNav";
 
 const outfit = Outfit({ 
   subsets: ["latin"],
@@ -30,6 +31,7 @@ export default function RootLayout({
         className={`${outfit.variable} ${oswald.variable} font-sans antialiased selection:bg-brand-pink selection:text-white`}
       >
         {children}
+        <MobileBottomNav />
       </body>
     </html>
   );

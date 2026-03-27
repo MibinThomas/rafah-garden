@@ -87,7 +87,7 @@ export default function Hero() {
       </div>
 
       {/* Center Animated Product Image */}
-      <div className="relative z-20 w-full h-[55vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh] max-w-full md:max-w-md lg:max-w-lg -translate-y-16 md:translate-y-0 flex justify-center items-center">
+      <div className="relative z-20 w-full h-[45vh] sm:h-[50vh] md:h-[70vh] lg:h-[80vh] max-w-full md:max-w-md lg:max-w-lg -translate-y-16 md:translate-y-0 flex justify-center items-center">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentProduct.id}
@@ -109,7 +109,7 @@ export default function Hero() {
       </div>
 
       {/* Bottom Left Animated Content */}
-      <div className="absolute bottom-20 md:bottom-12 left-0 md:left-16 w-full md:w-auto px-6 md:px-0 z-30 flex flex-col items-center md:items-start text-center md:text-left text-white">
+      <div className="absolute bottom-32 md:bottom-12 left-0 md:left-16 w-full md:w-auto px-6 md:px-0 z-30 flex flex-col items-center md:items-start text-center md:text-left text-white">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentProduct.id}
@@ -133,7 +133,7 @@ export default function Hero() {
       </div>
 
       {/* Center Bottom Navigation Arrows */}
-      <div className="absolute bottom-6 md:bottom-12 left-1/2 -translate-x-1/2 z-30 flex md:flex gap-4">
+      <div className="absolute bottom-20 md:bottom-12 left-1/2 -translate-x-1/2 z-30 flex md:flex gap-4">
         <button 
           onClick={prevSlide}
           className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/50 flex items-center justify-center text-white hover:bg-white hover:text-brand-pink transition-colors text-lg md:text-xl font-light cursor-pointer shadow-lg"
