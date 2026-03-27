@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 
@@ -35,9 +36,14 @@ export default function Navbar() {
     >
       <div className="container mx-auto px-6 max-w-7xl flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
-          <span className={`font-oswald text-2xl font-bold tracking-tight uppercase transition-colors duration-300 ${isScrolled ? "text-brand-pink" : "text-white"}`}>
-            Rafah <span className={isScrolled ? "text-brand-green" : "text-white/80"}>Garden</span>
-          </span>
+          <Image 
+            src="/logos/Rafah logo white.webp" 
+            alt="Rafah Garden Logo" 
+            width={150} 
+            height={50} 
+            className="w-auto h-8 md:h-10 object-contain"
+            priority
+          />
         </Link>
 
         {/* Desktop Nav */}

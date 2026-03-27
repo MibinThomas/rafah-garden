@@ -60,13 +60,13 @@ export default function Hero() {
         style={{ y: yText }}
         className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-0 overflow-hidden"
       >
-        <h1 className="font-oswald text-[30vw] md:text-[25vw] leading-none text-white font-bold tracking-tighter opacity-95 whitespace-nowrap drop-shadow-lg transition-all duration-1000">
+        <h1 className="font-oswald text-[40vw] md:text-[25vw] leading-none text-white font-bold tracking-tighter opacity-95 whitespace-nowrap drop-shadow-lg transition-all duration-1000 -translate-y-16 md:translate-y-0">
           RAFAH
         </h1>
       </motion.div>
 
       {/* Floating Fruits Background Elements */}
-      <div className="absolute inset-0 z-10 pointer-events-none">
+      <div className="absolute inset-0 z-10 pointer-events-none hidden md:block">
         <motion.div 
           style={{ y: yFruits1 }}
           animate={{ rotate: 360, y: [0, -20, 0] }}
@@ -87,7 +87,7 @@ export default function Hero() {
       </div>
 
       {/* Center Animated Product Image */}
-      <div className="relative z-20 w-full max-w-xs md:max-w-md lg:max-w-lg aspect-[1/2] mt-10 md:mt-0 flex justify-center items-center">
+      <div className="relative z-20 w-full h-[55vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh] max-w-full md:max-w-md lg:max-w-lg -translate-y-16 md:translate-y-0 flex justify-center items-center">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentProduct.id}
@@ -109,7 +109,7 @@ export default function Hero() {
       </div>
 
       {/* Bottom Left Animated Content */}
-      <div className="absolute bottom-12 left-6 md:left-16 z-30 max-w-xs md:max-w-md text-white">
+      <div className="absolute bottom-20 md:bottom-12 left-0 md:left-16 w-full md:w-auto px-6 md:px-0 z-30 flex flex-col items-center md:items-start text-center md:text-left text-white">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentProduct.id}
@@ -117,31 +117,32 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.5 }}
+            className="flex flex-col items-center md:items-start"
           >
-            <h2 className="font-outfit text-4xl md:text-5xl font-light mb-4 leading-tight">
-              {currentProduct.title1} <br/> <span className="font-bold">{currentProduct.title2}</span>
+            <h2 className="font-outfit text-3xl md:text-5xl font-light mb-2 md:mb-4 leading-tight">
+              {currentProduct.title1} <br className="hidden sm:block"/> <span className="font-bold">{currentProduct.title2}</span>
             </h2>
-            <p className="text-sm md:text-base text-white/90 font-light mb-6 leading-relaxed">
+            <p className="text-xs sm:text-sm md:text-base text-white/90 font-light mb-4 md:mb-6 leading-relaxed max-w-[300px] md:max-w-md">
               {currentProduct.desc}
             </p>
           </motion.div>
         </AnimatePresence>
-        <button className="bg-white text-brand-pink px-8 py-3 rounded-full font-bold text-sm hover:scale-105 transition-transform shadow-xl hover:shadow-2xl">
+        <button className="bg-white text-brand-pink px-6 md:px-8 py-2 md:py-3 rounded-full font-bold text-xs md:text-sm hover:scale-105 transition-transform shadow-xl hover:shadow-2xl">
           See More
         </button>
       </div>
 
       {/* Center Bottom Navigation Arrows */}
-      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-30 hidden md:flex gap-4">
+      <div className="absolute bottom-6 md:bottom-12 left-1/2 -translate-x-1/2 z-30 flex md:flex gap-4">
         <button 
           onClick={prevSlide}
-          className="w-12 h-12 rounded-full border border-white/50 flex items-center justify-center text-white hover:bg-white hover:text-brand-pink transition-colors text-xl font-light cursor-pointer shadow-lg"
+          className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/50 flex items-center justify-center text-white hover:bg-white hover:text-brand-pink transition-colors text-lg md:text-xl font-light cursor-pointer shadow-lg"
         >
           &#10094;
         </button>
         <button 
           onClick={nextSlide}
-          className="w-12 h-12 rounded-full border border-white/50 flex items-center justify-center text-white hover:bg-white hover:text-brand-pink transition-colors text-xl font-light cursor-pointer shadow-lg"
+          className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/50 flex items-center justify-center text-white hover:bg-white hover:text-brand-pink transition-colors text-lg md:text-xl font-light cursor-pointer shadow-lg"
         >
           &#10095;
         </button>
