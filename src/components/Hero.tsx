@@ -20,8 +20,9 @@ export default function Hero() {
   const yText = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
   const yFruits1 = useTransform(scrollYProgress, [0, 1], ["0%", "-50%"]);
   const yFruits2 = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-
   const currentProduct = heroProducts[currentIndex];
+  const prevProduct = heroProducts[(currentIndex - 1 + heroProducts.length) % heroProducts.length];
+  const nextProduct = heroProducts[(currentIndex + 1) % heroProducts.length];
 
   const nextSlide = () => setCurrentIndex((prev) => (prev + 1) % heroProducts.length);
   const prevSlide = () => setCurrentIndex((prev) => (prev - 1 + heroProducts.length) % heroProducts.length);
@@ -38,10 +39,7 @@ export default function Hero() {
         style={{ y: yText }}
         className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-0 overflow-hidden"
       >
-        <h1 
-          className="font-oswald text-[40vw] md:text-[30vw] lg:text-[25vw] leading-none text-white font-bold tracking-tighter opacity-100 whitespace-nowrap transition-all duration-1000 -translate-y-16 md:translate-y-0"
-          style={{ textShadow: "1px 1px 0px #f3f3f3, 2px 2px 0px #e8e8e8, 3px 3px 0px #dadada, 4px 4px 0px #cccccc, 5px 5px 0px #bebebe, 6px 6px 0px #b0b0b0, 15px 15px 40px rgba(0,0,0,0.4)" }}
-        >
+        <h1 className="font-oswald text-[40vw] md:text-[30vw] lg:text-[25vw] leading-none text-white font-bold tracking-tighter opacity-80 whitespace-nowrap blur-[3px] drop-shadow-[0_10px_20px_rgba(0,0,0,0.15)] transition-all duration-1000 -translate-y-16 md:translate-y-0">
           RAFAH
         </h1>
       </motion.div>
@@ -50,20 +48,48 @@ export default function Hero() {
       <div className="absolute inset-0 z-10 pointer-events-none hidden md:block">
         <motion.div 
           style={{ y: yFruits1 }}
-          animate={{ rotate: 360, y: [0, -20, 0] }}
-          transition={{ rotate: { duration: 50, repeat: Infinity, ease: "linear" }, y: { duration: 4, repeat: Infinity, ease: "easeInOut" } }}
           className="absolute top-[15%] left-[20%] w-32 h-32 md:w-40 md:h-40 lg:w-56 lg:h-56 drop-shadow-2xl"
         >
-          <Image src="/images/fresh.png" alt="Dragon Fruit" fill className="object-contain" priority />
+          <AnimatePresence mode="wait">
+            <motion.div 
+              key={prevProduct.id}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1, rotate: 360, y: [0, -20, 0] }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              transition={{ 
+                opacity: { duration: 0.5 }, 
+                scale: { duration: 0.5 },
+                rotate: { duration: 50, repeat: Infinity, ease: "linear" }, 
+                y: { duration: 4, repeat: Infinity, ease: "easeInOut" } 
+              }}
+              className="absolute inset-0"
+            >
+              <Image src={prevProduct.image} alt="Previous Product" fill className="object-contain" priority />
+            </motion.div>
+          </AnimatePresence>
         </motion.div>
         
         <motion.div 
           style={{ y: yFruits2 }}
-          animate={{ rotate: -360, y: [0, 20, 0] }}
-          transition={{ rotate: { duration: 60, repeat: Infinity, ease: "linear" }, y: { duration: 5, repeat: Infinity, ease: "easeInOut" } }}
           className="absolute bottom-[20%] right-[20%] w-24 h-24 md:w-32 md:h-32 lg:w-48 lg:h-48 drop-shadow-2xl"
         >
-          <Image src="/images/fresh.png" alt="Dragon Fruit" fill className="object-contain" priority />
+          <AnimatePresence mode="wait">
+            <motion.div 
+              key={nextProduct.id}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1, rotate: -360, y: [0, 20, 0] }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              transition={{ 
+                opacity: { duration: 0.5 }, 
+                scale: { duration: 0.5 },
+                rotate: { duration: 60, repeat: Infinity, ease: "linear" }, 
+                y: { duration: 5, repeat: Infinity, ease: "easeInOut" } 
+              }}
+              className="absolute inset-0"
+            >
+              <Image src={nextProduct.image} alt="Next Product" fill className="object-contain" priority />
+            </motion.div>
+          </AnimatePresence>
         </motion.div>
       </div>
 
