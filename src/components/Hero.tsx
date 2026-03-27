@@ -3,33 +3,10 @@
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { heroProducts } from "@/data/products";
 
-const heroProducts = [
-  {
-    id: 1,
-    title1: "Dragon Fruit",
-    title2: "Crush",
-    desc: "Discover a world of vibrant flavors with our premium organic selection. At Rafah Garden, we believe in the power of nature's finest ingredients to bring you delicious refreshment.",
-    image: "/images/crush.png",
-    bgClass: "from-[#E25695] to-[#AD135C]",
-  },
-  {
-    id: 2,
-    title1: "Fresh Organic",
-    title2: "Dragon Fruit",
-    desc: "Sun-ripened, organic, and harvested at peak sweetness. Experience the authentic taste of pristine nature in every lush bite of our fresh produce.",
-    image: "/images/fresh.png",
-    bgClass: "from-brand-pink to-[#8B0F4A]",
-  },
-  {
-    id: 3,
-    title1: "Premium Artisanal",
-    title2: "Fruit Jam",
-    desc: "A naturally sweet spread made with 100% real fruit. Perfect for your morning toast or artisanal desserts, crafted with endless passion in Kerala.",
-    image: "/images/jam.png",
-    bgClass: "from-[#AD135C] to-purple-900",
-  }
-];
+
 
 export default function Hero() {
   const ref = useRef(null);
@@ -127,9 +104,12 @@ export default function Hero() {
             </p>
           </motion.div>
         </AnimatePresence>
-        <button className="bg-white text-brand-pink px-6 md:px-7 lg:px-8 py-2 md:py-2.5 lg:py-3 rounded-full font-bold text-xs md:text-sm hover:scale-105 transition-transform shadow-xl hover:shadow-2xl">
+        <Link 
+          href={`/product/${currentProduct.id}`}
+          className="inline-block bg-white text-brand-pink px-6 md:px-7 lg:px-8 py-2 md:py-2.5 lg:py-3 rounded-full font-bold text-xs md:text-sm hover:scale-105 transition-transform shadow-xl hover:shadow-2xl"
+        >
           See More
-        </button>
+        </Link>
       </div>
 
       {/* Center Bottom Navigation Arrows */}
@@ -166,8 +146,8 @@ export default function Hero() {
 
       {/* Bottom Right Scroll Down */}
       <div className="absolute bottom-12 right-6 md:right-16 z-30 hidden md:block">
-        <a href="#about" className="w-24 h-24 rounded-full border border-white/40 flex items-center justify-center text-white flex-col gap-1 cursor-pointer hover:border-white transition-all hover:bg-white/10 backdrop-blur-sm shadow-xl group">
-          <span className="text-xs uppercase tracking-widest font-medium text-center leading-tight group-hover:scale-110 transition-transform">Scroll<br/>Down</span>
+        <a href="#about" className="w-24 h-24 rounded-full bg-white flex items-center justify-center text-brand-pink flex-col gap-1 cursor-pointer transition-all hover:scale-110 shadow-[0_10px_40px_rgba(255,255,255,0.3)] hover:shadow-[0_15px_50px_rgba(255,255,255,0.5)] ring-4 ring-white/20 group animate-pulse-slow">
+          <span className="text-[10px] md:text-xs uppercase tracking-widest font-bold text-center leading-tight group-hover:scale-110 transition-transform">Get in<br/>Bulk</span>
         </a>
       </div>
     </section>
