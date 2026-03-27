@@ -14,7 +14,10 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
   }
 
   return (
-    <main className={`min-h-screen bg-gradient-to-br ${product.bgClass} flex flex-col overflow-hidden`}>
+    <main 
+      className="min-h-screen flex flex-col overflow-hidden"
+      style={{ background: `linear-gradient(to bottom right, ${product.colorStart}, ${product.colorEnd})` }}
+    >
       {/* Header / Navigation back */}
       <motion.nav 
         initial={{ y: -50, opacity: 0 }}

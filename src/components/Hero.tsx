@@ -30,14 +30,18 @@ export default function Hero() {
     <section
       ref={ref}
       id="home"
-      className={`relative h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br transition-colors duration-1000 ${currentProduct.bgClass}`}
+      className="relative h-screen flex items-center justify-center overflow-hidden transition-colors duration-1000"
+      style={{ background: `linear-gradient(to bottom right, ${currentProduct.colorStart}, ${currentProduct.colorEnd})` }}
     >
       {/* Huge Background Text */}
       <motion.div 
         style={{ y: yText }}
         className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-0 overflow-hidden"
       >
-        <h1 className="font-oswald text-[40vw] md:text-[30vw] lg:text-[25vw] leading-none text-white font-bold tracking-tighter opacity-95 whitespace-nowrap drop-shadow-lg transition-all duration-1000 -translate-y-16 md:translate-y-0">
+        <h1 
+          className="font-oswald text-[40vw] md:text-[30vw] lg:text-[25vw] leading-none text-white font-bold tracking-tighter opacity-100 whitespace-nowrap transition-all duration-1000 -translate-y-16 md:translate-y-0"
+          style={{ textShadow: "1px 1px 0px #f3f3f3, 2px 2px 0px #e8e8e8, 3px 3px 0px #dadada, 4px 4px 0px #cccccc, 5px 5px 0px #bebebe, 6px 6px 0px #b0b0b0, 15px 15px 40px rgba(0,0,0,0.4)" }}
+        >
           RAFAH
         </h1>
       </motion.div>
