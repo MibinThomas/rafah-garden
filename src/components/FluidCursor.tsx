@@ -10,14 +10,14 @@ export default function FluidCursor() {
     if (isInitialized.current) return;
     isInitialized.current = true;
 
-    let initFluid = async () => {
+    const initFluid = async () => {
       if (typeof window !== 'undefined' && canvasRef.current) {
         try {
           // INTERCEPT canvas event listeners to bind them to window!
           // This allows the pointer-events-none canvas to flawlessly receive mouse movements
           // across the entire page without blocking interactions.
           const originalAddEventListener = canvasRef.current.addEventListener.bind(canvasRef.current);
-          canvasRef.current.addEventListener = (type: string, listener: any, options?: any) => {
+          canvasRef.current.addEventListener = (type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions) => {
             // Bind mouse and touch events to window instead of canvas
             if (['mousedown', 'mousemove', 'mouseup', 'touchstart', 'touchmove', 'touchend'].includes(type)) {
               window.addEventListener(type, listener, options);
@@ -26,7 +26,7 @@ export default function FluidCursor() {
             }
           };
 
-          // @ts-ignore
+          // @ts-expect-error webgl-fluid has no types
           const webGLFluid = (await import('webgl-fluid')).default;
           webGLFluid(canvasRef.current, {
             IMMEDIATE: true, 

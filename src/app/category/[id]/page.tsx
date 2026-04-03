@@ -1,6 +1,6 @@
 "use client";
 
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import { categories } from "@/data/categories";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -9,7 +9,6 @@ import Navbar from "@/components/Navbar";
 
 export default function CategoryPage() {
   const params = useParams();
-  const router = useRouter();
   const id = params.id as string;
 
   const category = categories.find((c) => c.id === id);
@@ -112,10 +111,10 @@ export default function CategoryPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               <div className="space-y-6">
                 <p className="text-lg text-gray-600 leading-relaxed">
-                  Our {category.title} line is the result of years of dedicated research and a commitment to Kerala's rich agricultural heritage. We source every ingredient directly from local farms, ensuring that what reaches your home is as fresh as if you had picked it yourself.
+                  Our {category.title} line is the result of years of dedicated research and a commitment to Kerala&apos;s rich agricultural heritage. We source every ingredient directly from local farms, ensuring that what reaches your home is as fresh as if you had picked it yourself.
                 </p>
                 <p className="text-lg text-gray-600 leading-relaxed">
-                  Whether you're looking for vibrant refreshment or a touch of nature for your living space, Rafah Garden provides unparalleled quality and taste that defines the modern organic lifestyle.
+                  Whether you&apos;re looking for vibrant refreshment or a touch of nature for your living space, Rafah Garden provides unparalleled quality and taste that defines the modern organic lifestyle.
                 </p>
               </div>
               
