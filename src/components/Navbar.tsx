@@ -37,7 +37,7 @@ export default function Navbar() {
       <div className="container mx-auto px-6 max-w-7xl flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
           <Image 
-            src="/logos/Rafah logo white.webp" 
+            src="/logos/Rafah logo.webp" 
             alt="Rafah Garden Logo" 
             width={150} 
             height={50} 
