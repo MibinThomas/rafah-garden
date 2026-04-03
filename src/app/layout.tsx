@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   description: "Premium dragon fruit farm products. Fresh, organic, and delicious.",
 };
 
-import FluidCursor from "@/components/FluidCursor";
+
 
 export default function RootLayout({
   children,
@@ -39,7 +39,6 @@ export default function RootLayout({
       <body
         className={`${outfit.variable} ${oswald.variable} ${avantGarde.variable} font-sans antialiased selection:bg-brand-pink selection:text-white`}
       >
-        <FluidCursor />
         {children}
         <MobileBottomNav />
       </body>

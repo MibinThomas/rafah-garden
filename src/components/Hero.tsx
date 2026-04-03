@@ -1,187 +1,134 @@
 "use client";
 
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
-import { useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { heroProducts } from "@/data/products";
-
-
+import { categories } from "@/data/categories";
 
 export default function Hero() {
-  const ref = useRef(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
-
-  const yText = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const yFruits1 = useTransform(scrollYProgress, [0, 1], ["0%", "-50%"]);
-  const yFruits2 = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const currentProduct = heroProducts[currentIndex];
-  const prevProduct = heroProducts[(currentIndex - 1 + heroProducts.length) % heroProducts.length];
-  const nextProduct = heroProducts[(currentIndex + 1) % heroProducts.length];
-
-  const nextSlide = () => setCurrentIndex((prev) => (prev + 1) % heroProducts.length);
-  const prevSlide = () => setCurrentIndex((prev) => (prev - 1 + heroProducts.length) % heroProducts.length);
+  const [activeCategoryId, setActiveCategoryId] = useState("crush");
 
   return (
-    <section
-      ref={ref}
-      id="home"
-      className="relative h-screen flex items-center justify-center overflow-hidden transition-colors duration-1000"
-      style={{ backgroundColor: currentProduct.bgColor }}
-    >
-      {/* Huge Background Text */}
-      <motion.div 
-        style={{ y: yText }}
-        className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-0 overflow-hidden"
-      >
-        <h1 
-          className="font-avant text-[36vw] md:text-[27vw] lg:text-[22vw] xl:text-[20vw] leading-none text-white font-bold tracking-tighter opacity-80 whitespace-nowrap drop-shadow-[0_10px_20px_rgba(0,0,0,0.15)] transition-all duration-1000 -translate-y-16 md:translate-y-0"
-        >
-          RAFAH
-        </h1>
-      </motion.div>
-
-      {/* Floating Fruits Background Elements */}
-      <div className="absolute inset-0 z-10 pointer-events-none hidden md:block">
-        <motion.div 
-          style={{ y: yFruits1 }}
-          className="absolute top-[15%] left-[20%] w-32 h-32 md:w-40 md:h-40 lg:w-56 lg:h-56 drop-shadow-2xl"
-        >
-          <AnimatePresence mode="wait">
-            <motion.div 
-              key={prevProduct.id}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1, rotate: 360, y: [0, -20, 0] }}
-              exit={{ opacity: 0, scale: 0.8 }}
-              transition={{ 
-                opacity: { duration: 0.5 }, 
-                scale: { duration: 0.5 },
-                rotate: { duration: 50, repeat: Infinity, ease: "linear" }, 
-                y: { duration: 4, repeat: Infinity, ease: "easeInOut" } 
-              }}
-              className="absolute inset-0"
-            >
-              <Image src={prevProduct.image} alt="Previous Product" fill className="object-contain" priority />
-            </motion.div>
-          </AnimatePresence>
-        </motion.div>
-        
-        <motion.div 
-          style={{ y: yFruits2 }}
-          className="absolute bottom-[20%] right-[20%] w-24 h-24 md:w-32 md:h-32 lg:w-48 lg:h-48 drop-shadow-2xl"
-        >
-          <AnimatePresence mode="wait">
-            <motion.div 
-              key={nextProduct.id}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1, rotate: -360, y: [0, 20, 0] }}
-              exit={{ opacity: 0, scale: 0.8 }}
-              transition={{ 
-                opacity: { duration: 0.5 }, 
-                scale: { duration: 0.5 },
-                rotate: { duration: 60, repeat: Infinity, ease: "linear" }, 
-                y: { duration: 5, repeat: Infinity, ease: "easeInOut" } 
-              }}
-              className="absolute inset-0"
-            >
-              <Image src={nextProduct.image} alt="Next Product" fill className="object-contain" priority />
-            </motion.div>
-          </AnimatePresence>
-        </motion.div>
-      </div>
-
-      {/* Center Animated Product Image */}
-      <div className="relative z-20 w-full h-[45vh] sm:h-[50vh] md:h-[60vh] lg:h-[70vh] xl:h-[80vh] max-w-full md:max-w-sm lg:max-w-md xl:max-w-lg -translate-y-16 md:translate-y-0 flex justify-center items-center">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentProduct.id}
-            initial={{ opacity: 0, x: 100, rotate: 10 }}
-            animate={{ opacity: 1, x: 0, rotate: 0 }}
-            exit={{ opacity: 0, x: -100, rotate: -10 }}
-            transition={{ duration: 0.6, ease: "easeInOut" }}
-            className="absolute inset-0"
-          >
-            <Image 
-              src={currentProduct.image} 
-              alt={currentProduct.title2} 
-              fill 
-              className="object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.3)]" 
-              priority
-            />
-          </motion.div>
-        </AnimatePresence>
-      </div>
-
-      {/* Bottom Left Animated Content */}
-      <div className="absolute bottom-32 md:bottom-12 left-0 md:left-16 w-full md:w-auto px-6 md:px-0 z-30 flex flex-col items-center md:items-start text-center md:text-left text-white">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentProduct.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.5 }}
-            className="flex flex-col items-center md:items-start"
-          >
-            <h2 className="font-outfit text-3xl md:text-4xl lg:text-5xl font-light mb-2 md:mb-4 leading-tight">
-              {currentProduct.title1} <br className="hidden sm:block"/> <span className="font-bold">{currentProduct.title2}</span>
-            </h2>
-            <p className="text-xs sm:text-sm lg:text-base text-white/90 font-light mb-4 md:mb-6 leading-relaxed max-w-[300px] md:max-w-[380px] lg:max-w-md">
-              {currentProduct.desc}
-            </p>
-          </motion.div>
-        </AnimatePresence>
-        <Link 
-          href={`/product/${currentProduct.id}`}
-          className="inline-block bg-white text-brand-pink px-6 md:px-7 lg:px-8 py-2 md:py-2.5 lg:py-3 rounded-full font-bold text-xs md:text-sm hover:scale-105 transition-transform shadow-xl hover:shadow-2xl"
-        >
-          See More
-        </Link>
-      </div>
-
-      {/* Center Bottom Navigation Arrows */}
-      <div className="absolute bottom-20 md:bottom-12 left-1/2 -translate-x-1/2 z-30 flex md:flex gap-4">
-        <button 
-          onClick={prevSlide}
-          className="w-10 h-10 lg:w-12 lg:h-12 rounded-full border border-white/50 flex items-center justify-center text-white hover:bg-white hover:text-brand-pink transition-colors text-lg lg:text-xl font-light cursor-pointer shadow-lg"
-        >
-          &#10094;
-        </button>
-        <button 
-          onClick={nextSlide}
-          className="w-10 h-10 lg:w-12 lg:h-12 rounded-full border border-white/50 flex items-center justify-center text-white hover:bg-white hover:text-brand-pink transition-colors text-lg lg:text-xl font-light cursor-pointer shadow-lg"
-        >
-          &#10095;
-        </button>
-      </div>
-
-      {/* Right Side Size Selectors */}
-      <div className="absolute right-6 md:right-16 top-1/2 -translate-y-1/2 z-30 hidden lg:flex flex-col gap-5">
-        <button className="w-20 h-20 rounded-full bg-white text-brand-pink font-bold text-base shadow-2xl flex items-center justify-center flex-col leading-tight transform hover:scale-110 transition-transform">
-          <span>500</span>
-          <span className="text-xs">ML</span>
-        </button>
-        <button className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-md border border-white/40 text-white font-medium text-sm hover:bg-white/30 transition-all flex items-center justify-center flex-col leading-tight cursor-pointer hover:scale-105">
-          <span>100</span>
-          <span className="text-[10px]">ML</span>
-        </button>
-        <button className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-md border border-white/40 text-white font-medium text-sm hover:bg-white/30 transition-all flex items-center justify-center flex-col leading-tight cursor-pointer hover:scale-105">
-          <span>125</span>
-          <span className="text-[10px]">ML</span>
-        </button>
-      </div>
-
-      {/* Bottom Right Scroll Down */}
-      <div className="absolute bottom-12 right-6 md:right-16 z-30 hidden md:block">
-        <a href="#about" className="w-24 h-24 rounded-full bg-white flex items-center justify-center text-brand-pink flex-col gap-1 cursor-pointer transition-all hover:scale-110 shadow-[0_10px_40px_rgba(255,255,255,0.3)] hover:shadow-[0_15px_50px_rgba(255,255,255,0.5)] ring-4 ring-white/20 group animate-pulse-slow">
-          <span className="text-[10px] md:text-xs uppercase tracking-widest font-bold text-center leading-tight group-hover:scale-110 transition-transform">Get in<br/>Bulk</span>
-        </a>
+    <section id="hero" className="relative h-screen min-h-[700px] w-full overflow-hidden bg-background pt-20">
+      <div className="flex h-full w-full flex-col md:flex-row">
+        {categories.map((category) => (
+          <CategoryItem
+            key={category.id}
+            category={category}
+            isActive={activeCategoryId === category.id}
+            onClick={() => setActiveCategoryId(category.id)}
+          />
+        ))}
       </div>
     </section>
+  );
+}
+
+function CategoryItem({ 
+  category, 
+  isActive, 
+  onClick 
+}: { 
+  category: typeof categories[0], 
+  isActive: boolean, 
+  onClick: () => void 
+}) {
+  return (
+    <motion.div
+      onClick={onClick}
+      layout
+      initial={false}
+      animate={{
+        flex: isActive ? 3 : 1,
+        transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] }
+      }}
+      className={`relative h-full cursor-pointer overflow-hidden border-r border-white/10 last:border-0 transition-colors duration-500`}
+      style={{ backgroundColor: isActive ? category.bgColor : "#f8f8f8" }}
+    >
+      {/* Background Text Overlay */}
+      <AnimatePresence>
+        {isActive && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 0.1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            className="absolute inset-0 flex items-center justify-center pointer-events-none"
+          >
+            <h2 className="text-[20vw] font-black text-white whitespace-nowrap uppercase tracking-tighter">
+              {category.id}
+            </h2>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <div className="relative z-10 flex h-full w-full flex-col p-8 md:p-12">
+        {/* Number & Basic Info (Preview) */}
+        <div className={`mb-12 transition-colors duration-500 ${isActive ? 'text-white' : 'text-gray-400'}`}>
+          <span className={`block text-5xl md:text-6xl font-oswald font-bold opacity-50 mb-4 transition-colors duration-500`} style={{ color: isActive ? 'white' : category.bgColor }}>
+            {category.number}
+          </span>
+          <h3 className={`text-2xl md:text-3xl font-bold uppercase tracking-tight transition-colors duration-500 ${isActive ? 'text-white' : 'text-foreground'}`}>
+            {category.title}
+          </h3>
+          <p className={`text-sm opacity-60 uppercase tracking-widest mt-1 transition-colors duration-500 ${isActive ? 'text-white' : 'text-gray-400'}`}>
+            {category.subtitle}
+          </p>
+        </div>
+
+        {/* Expanded Content */}
+        <AnimatePresence mode="wait">
+          {isActive ? (
+            <motion.div
+              key="expanded"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              className="flex-1 flex flex-col items-center justify-center md:items-start md:justify-end md:pb-12"
+            >
+              <div className="relative w-full h-[250px] md:h-[350px] lg:h-[400px] mb-6 group">
+                <Image
+                  src={category.image}
+                  alt={category.title}
+                  fill
+                  className="object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.3)] transition-transform duration-700"
+                  priority
+                />
+              </div>
+              
+              <div className="max-w-md w-full bg-black/10 backdrop-blur-sm p-6 rounded-2xl md:bg-transparent md:backdrop-blur-0 md:p-0">
+                <motion.p 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="text-white text-sm md:text-base font-light leading-relaxed mb-6 line-clamp-3 md:line-clamp-none"
+                >
+                  {category.description}
+                </motion.p>
+                <Link
+                  href={category.id === 'crush' ? `/product/1` : `/category/${category.id}`}
+                  className="inline-flex items-center group bg-white text-foreground px-6 py-3 md:px-8 md:py-4 rounded-full font-bold uppercase tracking-widest text-xs md:text-sm transition-all hover:bg-black hover:text-white"
+                >
+                  View more
+                  <svg className="ml-2 w-5 h-5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </Link>
+              </div>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="collapsed"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="flex-1 flex items-end"
+            >
+              <div className="w-full h-2 rounded-full bg-black/5" />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+
+      {/* Hover Line Marker removed */}
+    </motion.div>
   );
 }
