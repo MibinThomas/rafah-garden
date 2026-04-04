@@ -36,8 +36,8 @@ export const categories: Category[] = [
     title: "Fresh Fruits",
     subtitle: "Organic produce",
     description: "Sun-ripened, organic, and harvested at peak sweetness. Experience the authentic taste of pristine nature in every lush bite of our fresh produce.",
-    image: "/images/Bottle2.webp",
-    bgColor: "#7FA33F",
+    image: "/images/fresh fruits.png",
+    bgColor: "#88b671",
     accentColor: "#ffffff",
   },
   {
@@ -47,7 +47,7 @@ export const categories: Category[] = [
     subtitle: "Nature to your home",
     description: "Bring the beauty of Rafah Garden into your space. Our healthy dragon fruit plants are nurtured with care to ensure they thrive in your home or garden.",
     image: "/images/plants_premium.png",
-    bgColor: "#2D5A27",
+    bgColor: "#1D311F",
     accentColor: "#ffffff",
   },
 ];

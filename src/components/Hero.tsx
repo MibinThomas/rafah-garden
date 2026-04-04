@@ -132,6 +132,10 @@ function CategoryItem({
             exit={{ opacity: 0, scale: 0.8 }}
             className="absolute inset-0 flex items-center justify-center pointer-events-none"
           >
+            {/* Enhanced Background Depth Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40 pointer-events-none" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(255,255,255,0.06)_0%,transparent_70%)] pointer-events-none" />
+            
             <h2 className="text-[20vw] font-black text-white whitespace-nowrap uppercase tracking-tighter">
               {category.id}
             </h2>
@@ -144,15 +148,15 @@ function CategoryItem({
         {isActive && <DrawerNav />}
       </AnimatePresence>
 
-      <div className="relative z-10 flex h-full w-full flex-col p-6 pt-20 md:p-12 md:pt-24">
+      <div className="relative z-10 flex h-full w-full flex-col p-6 pt-24 md:p-12 md:pt-32">
         {/* Number & Basic Info (Preview) */}
         <motion.div
           animate={{ y: !isActive && isHovered ? -6 : 0 }}
           transition={{ duration: 0.3, ease: "easeOut" }}
-          className={`mb-8 md:mb-12 transition-colors duration-300 ${isActive ? 'text-white' : 'text-gray-400'}`}
+          className={`mb-6 md:mb-8 transition-colors duration-300 ${isActive ? 'text-white' : 'text-gray-400'}`}
         >
           <span
-            className="block text-4xl md:text-6xl font-oswald font-bold opacity-50 mb-2 md:mb-4 transition-all duration-300"
+            className="block text-4xl md:text-5xl font-oswald font-bold opacity-50 mb-1 md:mb-2 transition-all duration-300"
             style={{
               color: isActive ? 'white' : category.bgColor,
               opacity: isHovered && !isActive ? 0.8 : undefined,
@@ -160,10 +164,10 @@ function CategoryItem({
           >
             {category.number}
           </span>
-          <h3 className={`text-xl md:text-3xl font-bold uppercase tracking-tight transition-colors duration-300 ${isActive ? 'text-white' : 'text-foreground'}`}>
+          <h3 className={`text-xl md:text-2xl font-bold uppercase tracking-tight transition-colors duration-300 ${isActive ? 'text-white' : 'text-foreground'}`}>
             {category.title}
           </h3>
-          <p className={`text-[10px] md:text-sm opacity-60 uppercase tracking-widest mt-1 transition-colors duration-300 ${isActive ? 'text-white' : 'text-gray-400'}`}>
+          <p className={`text-[10px] md:text-xs font-light opacity-60 uppercase tracking-widest mt-1 transition-colors duration-300 ${isActive ? 'text-white' : 'text-gray-400'}`}>
             {category.subtitle}
           </p>
         </motion.div>
@@ -184,18 +188,18 @@ function CategoryItem({
           {isActive ? (
             <motion.div
               key="expanded"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
               className="flex-1 flex flex-col min-h-0"
             >
-              {/* Product image — grows to fill available height */}
-              <div className="relative flex-1 min-h-0 w-full">
+              {/* Product image — massive scale for better visibility */}
+              <div className="relative flex-1 min-h-0 w-full lg:scale-[1.45] -mt-4 transition-transform duration-700">
                 <Image
                   src={category.image}
                   alt={category.title}
                   fill
-                  className="object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.3)]"
+                  className="object-contain drop-shadow-[0_40px_80px_rgba(0,0,0,0.35)] md:hover:scale-105 transition-transform duration-500"
                   priority
                 />
               </div>
@@ -212,7 +216,7 @@ function CategoryItem({
                 </p>
                 {/* ── Enhanced View More Button ── */}
                 <ViewMoreButton
-                  href={category.id === 'crush' ? `/product/1` : `/category/${category.id}`}
+                  href={`/category/${category.id}`}
                   bgColor={category.bgColor}
                 />
               </motion.div>
