@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { Outfit, Oswald } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
+import { CategoryProvider } from "@/context/CategoryContext";
 import MobileBottomNav from "@/components/MobileBottomNav";
+
 
 const avantGarde = localFont({
   src: "../../public/fonts/avant-garde.otf",
@@ -39,8 +41,10 @@ export default function RootLayout({
       <body
         className={`${outfit.variable} ${oswald.variable} ${avantGarde.variable} font-sans antialiased selection:bg-brand-pink selection:text-white`}
       >
-        {children}
-        <MobileBottomNav />
+        <CategoryProvider>
+          {children}
+          <MobileBottomNav />
+        </CategoryProvider>
       </body>
     </html>
   );

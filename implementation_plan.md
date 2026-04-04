@@ -1,50 +1,34 @@
-# Implementation Plan - Modern Category-Based Hero Section
+# Category Page Redesign
 
-The goal is to replace the current slider hero section with a modern, 4-column category layout inspired by the provided screenshot. Each column will expand on click to reveal specific product details, and the "Dragon Fruit Crush" category will retain the existing hero content style.
+Transform the category page (`/category/[id]`) to match the premium, minimal aesthetic shown in the reference image.
+
+## User Review Required
+
+> [!IMPORTANT]
+> The new design is a "Hero-focused" layout that emphasizes a single product image over a large background title. This is a significant departure from the current multi-section layout.
 
 ## Proposed Changes
 
-### [Component] [Hero Component](file:///c:/MIB/rafah-garden/src/components/Hero.tsx)
-#### [MODIFY] [Hero.tsx](file:///c:/MIB/rafah-garden/src/components/Hero.tsx)
-- Refactor the component to use a flexbox/grid layout with 4 columns.
-- Implement an accordion-style expansion where clicking a category expands it and collapses others.
-- **Category 1 (Dragon Fruit Crush)**: When expanded, it will display the animated product bottle, text, and navigation originally present in the hero.
-- **Other Categories (Jam, Fruits, Plants)**: Implement unique "expanded" views for each, following the same premium aesthetic.
-- Add numbers (01, 02, 03, 04) and "View more" buttons as seen in the mockup.
-
-### [Data] [Category & Product Data](file:///c:/MIB/rafah-garden/src/data/categories.ts)
-#### [NEW] [categories.ts](file:///c:/MIB/rafah-garden/src/data/categories.ts)
-- Define a new data structure for the 4 categories:
-  1. **Dragon Fruit Crush**
-  2. **Dragon Fruit Jam**
-  3. **Fruits**
-  4. **Plants**
-- Include metadata like background color, accent color, image, description, and number.
-
-### [Pages] [Dynamic Category Pages](file:///c:/MIB/rafah-garden/src/app/category/%5Bid%5D/page.tsx)
-#### [NEW] [category/[id]/page.tsx](file:///c:/MIB/rafah-garden/src/app/category/[id]/page.tsx)
-- Create a dynamic route to handle each category.
-- Each page will feature:
-  - High-quality imagery (generated image).
-  - Premium layout with Framer Motion animations.
-  - Consistent branding with the hero section.
-
-### [Assets] [New Images]
-- [Dragon Fruit Jam](file:///C:/Users/Lazim/.gemini/antigravity/brain/edfefb8d-391a-4aa4-bdb8-f58f8bca95be/dragon_fruit_jam_premium_1775225627246.png)
-- [Dragon Fruit Plants](file:///C:/Users/Lazim/.gemini/antigravity/brain/edfefb8d-391a-4aa4-bdb8-f58f8bca95be/dragon_fruit_plant_pot_1775225649439.png)
-- Existing Bottle Renders for Crush and Fruits.
+### [MODIFY] [CategoryPage](file:///c:/MIB/rafah-garden/src/app/category/[id]/page.tsx)
+- **High-Impact Hero Section**:
+    - **Background**: Set to `category.bgColor`.
+    - **Large Text Overlay**: Render the category title or ID in massive, bold, white typography (using `font-avant`) behind the product image.
+    - **Centered Product**: Position `category.image` centered and overlapping the background text.
+- **New UI Elements**:
+    - **Right Side Variations**: Add a vertical list of circular buttons representing different sizes or variations (e.g., 500ML, 250ML).
+    - **Bottom-Left Content**: Re-position the subtitle, description, and "See More" button (styled as a white pill).
+    - **Bottom-Right Scroll**: Add a circular "Scroll Down" indicator.
+- **Refined Navigation**:
+    - Update the custom `Navbar` on this page to use minimal white text links and icons to match the reference image's clean aesthetic.
 
 ## Open Questions
-- Should the "View more" button in the hero navigate directly to the category page, or should it just trigger the expansion within the hero? (Plan: expansion on column click, button navigates to page).
-- Do you want any specific color palette for "Plants" and "Fruits" beyond the standard green/yellow?
+
+- **Variation Data**: Since the current data doesn't have "sizes" or "volumes", should I use placeholders like "500ML", "250ML"?
+- **Scroll Functionality**: Should the "Scroll Down" button link to a specific section below or just be a decorative element for now?
 
 ## Verification Plan
 
-### Automated Tests
-- N/A (Mostly UI focus)
-
 ### Manual Verification
-- Verify the accordion interaction in the browser using the `browser_subagent`.
-- Check responsiveness on mobile (stacking columns vertically).
-- Ensure smooth transitions between categories.
-- Validate that each "View more" link leads to the correct category page.
+- [ ] View various categories on mobile and desktop to ensure the centered product layout is responsive.
+- [ ] Test that the "See More" and "Scroll Down" buttons are accessible.
+- [ ] Verify the large background text accurately reflects the category title.
