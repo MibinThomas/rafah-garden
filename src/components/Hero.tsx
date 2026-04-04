@@ -4,15 +4,67 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { ShoppingBag } from "lucide-react";
 import { categories } from "@/data/categories";
 import { useCategory } from "@/context/CategoryContext";
+
+const navLinks = [
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
+  { name: "Products", href: "/#products" },
+];
+
+// Floating nav rendered inside the active drawer
+function DrawerNav() {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
+      className="absolute top-0 left-0 right-0 z-30 flex items-center justify-between px-6 md:px-12 py-5 md:py-7"
+    >
+      {/* Logo */}
+      <Link href="/" className="flex-shrink-0">
+        <Image
+          src="/logos/Rafah logo.webp"
+          alt="Rafah Garden"
+          width={120}
+          height={40}
+          className="w-auto h-7 md:h-8 object-contain brightness-0 invert"
+          priority
+        />
+      </Link>
+
+      {/* Desktop links */}
+      <nav className="hidden md:flex items-center gap-7">
+        {navLinks.map((link) => (
+          <Link
+            key={link.name}
+            href={link.href}
+            className="text-white/65 hover:text-white text-[11px] uppercase tracking-[0.2em] font-medium transition-colors duration-200"
+          >
+            {link.name}
+          </Link>
+        ))}
+        <Link
+          href="/#products"
+          className="flex items-center gap-1.5 text-white border border-white/30 rounded-full px-4 py-1.5 text-[11px] uppercase tracking-widest hover:bg-white/10 transition-all"
+        >
+          <ShoppingBag size={11} />
+          Shop
+        </Link>
+      </nav>
+    </motion.div>
+  );
+}
 
 export default function Hero() {
   const { activeCategoryId, setActiveCategoryId } = useCategory();
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   return (
-    <section id="hero" className="relative h-screen min-h-[600px] w-full overflow-hidden bg-background pt-16 md:pt-20">
+    <section id="hero" className="relative h-screen min-h-[600px] w-full overflow-hidden bg-background">
       <div className="flex h-full w-full flex-col md:flex-row">
         {categories.map((category) => {
           const isActive = activeCategoryId === category.id;
@@ -87,7 +139,12 @@ function CategoryItem({
         )}
       </AnimatePresence>
 
-      <div className="relative z-10 flex h-full w-full flex-col p-6 md:p-12">
+      {/* Drawer nav — only in the active/expanded panel */}
+      <AnimatePresence>
+        {isActive && <DrawerNav />}
+      </AnimatePresence>
+
+      <div className="relative z-10 flex h-full w-full flex-col p-6 pt-20 md:p-12 md:pt-24">
         {/* Number & Basic Info (Preview) */}
         <motion.div
           animate={{ y: !isActive && isHovered ? -6 : 0 }}
