@@ -1,7 +1,7 @@
 "use client";
 
 import { useCategory } from "@/context/CategoryContext";
-import { categories } from "@/data/categories";
+
 import { GlassWater, Container, Apple, Leaf } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -20,7 +20,6 @@ export default function MobileBottomNav() {
       <div className="flex justify-between items-center max-w-md mx-auto">
         {navItems.map((item) => {
           const isActive = activeCategoryId === item.id;
-          const category = categories.find(c => c.id === item.id);
           const Icon = item.icon;
           
           return (
