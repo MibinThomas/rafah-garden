@@ -14,46 +14,71 @@ const navLinks = [
   { name: "Products", href: "/#products" },
 ];
 
+// Liquid easing curve for premium feel
+const transition_liquid = { duration: 0.8, ease: [0.22, 1, 0.36, 1] as const };
+
+
 // Floating nav rendered inside the active drawer
 function DrawerNav() {
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: -10 },
+    show: { opacity: 1, y: 0, transition: transition_liquid },
+  };
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: -10 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -10 }}
-      transition={{ duration: 0.4, ease: "easeOut" }}
+      variants={container}
+      initial="hidden"
+      animate="show"
+      exit="hidden"
       className="absolute top-0 left-0 right-0 z-30 flex items-center justify-between px-6 md:px-12 py-5 md:py-7"
     >
       {/* Logo */}
-      <Link href="/" className="flex-shrink-0">
-        <Image
-          src="/logos/Rafah logo.webp"
-          alt="Rafah Garden"
-          width={120}
-          height={40}
-          className="w-auto h-7 md:h-8 object-contain brightness-0 invert"
-          priority
-        />
-      </Link>
+      <motion.div variants={item}>
+        <Link href="/" className="flex-shrink-0">
+          <Image
+            src="/logos/Rafah logo.webp"
+            alt="Rafah Garden"
+            width={120}
+            height={40}
+            className="w-auto h-7 md:h-8 object-contain brightness-0 invert"
+            priority
+          />
+        </Link>
+      </motion.div>
 
       {/* Desktop links */}
       <nav className="hidden md:flex items-center gap-7">
         {navLinks.map((link) => (
-          <Link
-            key={link.name}
-            href={link.href}
-            className="text-white/65 hover:text-white text-[11px] uppercase tracking-[0.2em] font-medium transition-colors duration-200"
-          >
-            {link.name}
-          </Link>
+          <motion.div key={link.name} variants={item}>
+            <Link
+              href={link.href}
+              className="text-white/65 hover:text-white text-[11px] uppercase tracking-[0.2em] font-medium transition-colors duration-200"
+            >
+              {link.name}
+            </Link>
+          </motion.div>
         ))}
-        <Link
-          href="/#products"
-          className="flex items-center gap-1.5 text-white border border-white/30 rounded-full px-4 py-1.5 text-[11px] uppercase tracking-widest hover:bg-white/10 transition-all"
-        >
-          <ShoppingBag size={11} />
-          Shop
-        </Link>
+        <motion.div variants={item}>
+          <Link
+            href="/#products"
+            className="flex items-center gap-1.5 text-white border border-white/30 rounded-full px-4 py-1.5 text-[11px] uppercase tracking-widest hover:bg-white/10 transition-all"
+          >
+            <ShoppingBag size={11} />
+            Shop
+          </Link>
+        </motion.div>
       </nav>
     </motion.div>
   );
@@ -87,151 +112,195 @@ export default function Hero() {
 
 function CategoryItem({ 
   category, 
-  isActive,
-  isHovered,
-  onActivate,
-  onHover,
-  className = ""
+  isActive, 
+  isHovered, 
+  onActivate, 
+  onHover, 
+  className = "" 
 }: { 
   category: typeof categories[0], 
-  isActive: boolean,
-  isHovered: boolean,
-  onActivate: () => void,
-  onHover: (id: string | null) => void,
-  className?: string
+  isActive: boolean, 
+  isHovered: boolean, 
+  onActivate: () => void, 
+  onHover: (id: string | null) => void, 
+  className?: string 
 }) {
   // For inactive panels: base grey + a soft colour wash that fades in on hover
   const inactiveBg = isHovered
     ? `color-mix(in srgb, ${category.bgColor} 18%, #f8f8f8)`
     : "#f8f8f8";
 
+  // Stagger container for text elements
+  const contentContainer = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.08,
+        delayChildren: 0.4,
+      },
+    },
+  };
+
+  const contentItem = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0, transition: transition_liquid },
+  };
+
   return (
     <motion.div
-      // Touch fallback — tap still works on mobile
       onClick={onActivate}
       onHoverStart={() => {
-        onActivate();          // expand this drawer
-        onHover(category.id);  // apply highlight tint
+        onActivate();          
+        onHover(category.id);  
       }}
-      onHoverEnd={() => onHover(null)} // clear highlight; drawer stays open
+      onHoverEnd={() => onHover(null)}
       layout
       initial={false}
       animate={{
         flex: isActive ? 4 : 1,
-        transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] }
+        transition: transition_liquid
       }}
-      className={`relative h-full cursor-pointer overflow-hidden border-r border-white/10 last:border-0 transition-colors duration-500 ${className}`}
-      style={{ backgroundColor: isActive ? category.bgColor : inactiveBg }}
+      className={`relative h-full cursor-pointer transition-colors duration-500 ${className}`}
+      style={{ 
+        backgroundColor: isActive ? category.bgColor : inactiveBg,
+        zIndex: 10 - parseInt(category.number)
+      }}
     >
-      {/* Background Text Overlay */}
-      <AnimatePresence>
-        {isActive && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 0.1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.8 }}
-            className="absolute inset-0 flex items-center justify-center pointer-events-none"
-          >
-            {/* Enhanced Background Depth Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40 pointer-events-none" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(255,255,255,0.06)_0%,transparent_70%)] pointer-events-none" />
-            
-            <h2 className="text-[20vw] font-black text-white whitespace-nowrap uppercase tracking-tighter">
-              {category.id}
-            </h2>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* ── Premium Panel Separation Shadow (Outer) ── */}
+      <div className="absolute top-0 right-0 bottom-0 w-px bg-white/10 z-20" />
+      <div className="absolute top-0 right-0 bottom-0 w-8 md:w-16 bg-gradient-to-l from-black/20 to-transparent z-10 pointer-events-none" />
 
-      {/* Drawer nav — only in the active/expanded panel */}
-      <AnimatePresence>
-        {isActive && <DrawerNav />}
-      </AnimatePresence>
-
-      <div className="relative z-10 flex h-full w-full flex-col p-6 pt-24 md:p-12 md:pt-32">
-        {/* Number & Basic Info (Preview) */}
-        <motion.div
-          animate={{ y: !isActive && isHovered ? -6 : 0 }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
-          className={`mb-6 md:mb-8 transition-colors duration-300 ${isActive ? 'text-white' : 'text-gray-400'}`}
-        >
-          <span
-            className="block text-4xl md:text-5xl font-oswald font-bold opacity-50 mb-1 md:mb-2 transition-all duration-300"
-            style={{
-              color: isActive ? 'white' : category.bgColor,
-              opacity: isHovered && !isActive ? 0.8 : undefined,
-            }}
-          >
-            {category.number}
-          </span>
-          <h3 className={`text-xl md:text-2xl font-bold uppercase tracking-tight transition-colors duration-300 ${isActive ? 'text-white' : 'text-foreground'}`}>
-            {category.title}
-          </h3>
-          <p className={`text-[10px] md:text-xs font-light opacity-60 uppercase tracking-widest mt-1 transition-colors duration-300 ${isActive ? 'text-white' : 'text-gray-400'}`}>
-            {category.subtitle}
-          </p>
-        </motion.div>
-
-        {/* Hover accent bar — only visible on inactive hovered panels */}
-        {!isActive && (
-          <motion.div
-            animate={{ scaleX: isHovered ? 1 : 0, opacity: isHovered ? 1 : 0 }}
-            initial={{ scaleX: 0, opacity: 0 }}
-            transition={{ duration: 0.35, ease: "easeOut" }}
-            className="absolute bottom-0 left-0 right-0 h-1 origin-left rounded-full"
-            style={{ backgroundColor: category.bgColor }}
-          />
-        )}
-
-        {/* Expanded Content — image fills space, button stays visible */}
-        <AnimatePresence mode="wait">
-          {isActive ? (
+      <div className="relative h-full w-full overflow-hidden">
+        {/* Background Text Overlay */}
+        <AnimatePresence>
+          {isActive && (
             <motion.div
-              key="expanded"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              className="flex-1 flex flex-col min-h-0"
+              key="bg-text"
+              initial={{ opacity: 0, x: -50, scale: 0.95 }}
+              animate={{ opacity: 0.1, x: 0, scale: 1 }}
+              exit={{ opacity: 0, x: 50, scale: 0.95 }}
+              transition={transition_liquid}
+              className="absolute inset-0 flex items-center justify-center pointer-events-none"
             >
-              {/* Product image — massive scale for better visibility */}
-              <div className="relative flex-1 min-h-0 w-full lg:scale-[1.45] -mt-4 transition-transform duration-700">
-                <Image
-                  src={category.image}
-                  alt={category.title}
-                  fill
-                  className="object-contain drop-shadow-[0_40px_80px_rgba(0,0,0,0.35)] md:hover:scale-105 transition-transform duration-500"
-                  priority
-                />
-              </div>
-
-              {/* Description + CTA — anchored at bottom, never clipped */}
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                className="pb-6 md:pb-10 pt-2 flex-shrink-0"
-              >
-                <p className="text-white/75 text-[11px] md:text-sm font-light leading-relaxed mb-3 md:mb-4 line-clamp-2 md:line-clamp-3">
-                  {category.description}
-                </p>
-                {/* ── Enhanced View More Button ── */}
-                <ViewMoreButton
-                  href={`/category/${category.id}`}
-                  bgColor={category.bgColor}
-                />
-              </motion.div>
-            </motion.div>
-          ) : (
-            <motion.div
-              key="collapsed"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="flex-1 flex items-end"
-            >
-              <div className="w-full h-1 md:h-2 rounded-full bg-black/5" />
+              {/* Enhanced Background Depth Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40 pointer-events-none" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(255,255,255,0.06)_0%,transparent_70%)] pointer-events-none" />
+              
+              {/* ── Separation Shadows (Inner Active / Synchronized) ── */}
+              <motion.div 
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ ...transition_liquid, delay: 0.1 }}
+                className="absolute top-0 left-0 bottom-0 w-24 bg-gradient-to-r from-black/25 to-transparent pointer-events-none z-20" 
+              />
+              <motion.div 
+                initial={{ opacity: 0, x: 30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ ...transition_liquid, delay: 0.1 }}
+                className="absolute top-0 right-0 bottom-0 w-24 bg-gradient-to-l from-black/25 to-transparent pointer-events-none z-20" 
+              />
+              
+              <h2 className="text-[20vw] font-black text-white whitespace-nowrap uppercase tracking-tighter">
+                {category.id}
+              </h2>
             </motion.div>
           )}
         </AnimatePresence>
+
+        {/* Drawer nav — only in the active/expanded panel */}
+        <AnimatePresence mode="wait">
+          {isActive && <DrawerNav />}
+        </AnimatePresence>
+
+        <div className="relative z-10 flex h-full w-full flex-col p-6 pt-24 md:p-12 md:pt-32">
+          {/* Number & Basic Info (Preview) */}
+          <motion.div
+            animate={{ y: !isActive && isHovered ? -6 : 0 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className={`mb-6 md:mb-8 transition-colors duration-300 ${isActive ? 'text-white' : 'text-gray-400'}`}
+          >
+            <span
+              className="block text-4xl md:text-5xl font-avant font-bold opacity-50 mb-1 md:mb-2 transition-all duration-300"
+              style={{
+                color: isActive ? 'white' : category.bgColor,
+                opacity: isHovered && !isActive ? 0.8 : 0.5,
+              }}
+            >
+              {category.number}
+            </span>
+            <h3 className={`text-xl md:text-2xl font-bold uppercase tracking-tight transition-colors duration-300 ${isActive ? 'text-white' : 'text-gray-900'}`}>
+              {category.title}
+            </h3>
+            <p className={`text-[10px] md:text-xs font-light opacity-60 uppercase tracking-widest mt-1 transition-colors duration-300 ${isActive ? 'text-white' : 'text-gray-400'}`}>
+              {category.subtitle}
+            </p>
+          </motion.div>
+
+          <AnimatePresence mode="wait">
+            {isActive ? (
+              <motion.div
+                key="expanded"
+                variants={contentContainer}
+                initial="hidden"
+                animate="show"
+                exit="hidden"
+                className="flex-1 flex flex-col min-h-0"
+              >
+                {/* Product image — massive scale for better visibility + breathing loop */}
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                  animate={{ 
+                    opacity: 1, 
+                    scale: 1, 
+                    y: [10, -5, 10],
+                    transition: {
+                      opacity: { duration: 0.6, ease: "easeOut", delay: 0.2 },
+                      scale: { duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 },
+                      y: { duration: 5, repeat: Infinity, ease: "easeInOut" }
+                    }
+                  }}
+                  className="relative flex-1 min-h-0 w-full lg:scale-[1.45] -mt-4"
+                >
+                  <Image
+                    src={category.image}
+                    alt={category.title}
+                    fill
+                    className="object-contain drop-shadow-[0_40px_80px_rgba(0,0,0,0.35)] md:hover:scale-105 transition-transform duration-700"
+                    priority
+                  />
+                </motion.div>
+
+                {/* Description + CTA — anchored at bottom, never clipped */}
+                <div className="pb-6 md:pb-10 pt-2 flex-shrink-0">
+                  <motion.p 
+                    variants={contentItem}
+                    className="text-white/75 text-[11px] md:text-sm font-light leading-relaxed mb-3 md:mb-4 line-clamp-2 md:line-clamp-3"
+                  >
+                    {category.description}
+                  </motion.p>
+                  
+                  <motion.div variants={contentItem}>
+                    {/* ── Enhanced View More Button ── */}
+                    <ViewMoreButton
+                      href={`/category/${category.id}`}
+                      bgColor={category.bgColor}
+                    />
+                  </motion.div>
+                </div>
+              </motion.div>
+            ) : (
+              <motion.div
+                key="collapsed"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="flex-1 flex items-end"
+              >
+                <div className="w-full h-1 md:h-2 rounded-full bg-black/5" />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </div>
     </motion.div>
   );

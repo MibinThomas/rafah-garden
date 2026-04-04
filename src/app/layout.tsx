@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { CategoryProvider } from "@/context/CategoryContext";
 import MobileBottomNav from "@/components/MobileBottomNav";
+import SmoothScroll from "@/components/SmoothScroll";
 
 
 const avantGarde = localFont({
@@ -41,10 +42,12 @@ export default function RootLayout({
       <body
         className={`${outfit.variable} ${oswald.variable} ${avantGarde.variable} font-sans antialiased selection:bg-brand-pink selection:text-white`}
       >
-        <CategoryProvider>
-          {children}
-          <MobileBottomNav />
-        </CategoryProvider>
+        <SmoothScroll>
+          <CategoryProvider>
+            {children}
+            <MobileBottomNav />
+          </CategoryProvider>
+        </SmoothScroll>
       </body>
     </html>
   );
